@@ -1,9 +1,10 @@
 
-import { CircularProgressbar, CircularProgressbarWithChildren  } from 'react-circular-progressbar';
+import { CircularProgressbarWithChildren  } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
 import axios from 'axios';
+import apiUrl from '../service/apiUrl'
 
-import { List, CreditCard, WifiHigh,ShoppingCart, Bus, FirstAidKit, Book, Student, Calendar, BeerStein, HandHeart, Bank, PiggyBank, Gift} from "@phosphor-icons/react";
+import { CreditCard, WifiHigh,ShoppingCart, Bus, FirstAidKit, Book, Student, Calendar, BeerStein, HandHeart, Bank, PiggyBank, Gift} from "@phosphor-icons/react";
 
 export default function ProgressBar({data}){
 
@@ -13,7 +14,7 @@ export default function ProgressBar({data}){
         const token = localStorage.getItem('token'); // Obter o token do localStorage
   
         try {
-          const response = await axios.post('http://127.0.0.1:3333/estimated-values', {
+          const response = await axios.post(`${apiUrl}/estimated-values`, {
                 categoryId:categoryId,
                 value:2500,
                 userId: Number(userId),
@@ -62,12 +63,7 @@ export default function ProgressBar({data}){
                 }
 
                 return (
-                    // <div style={{ width: 100, height: 100, display:'flex',flexDirection:'column', justifyContent:'center', alignItems:'center', position:'relative' }}>
-                    //     {Icon && <Icon size={24} style={{ marginBottom: 10 }} />}
-                    //     <p style={{fontSize:'10px', position:'absolute', top:'10px', fontWeight:'bold', color:'#e53371'}}>{item.label}</p>
-                    //     <CircularProgressbar value={item.progresso?.toFixed(0)} text={`${item.progresso?.toFixed(0)}%`} />
-                    // </div>
-                 
+               
                      <div style={{ width: 100, height: 130, display:'flex',flexDirection:'column', justifyContent:'center', alignItems:'center', position:'relative' }}
                       onClick={() => handleEstimatedValue(item.id, item.userId)}>
                         <CircularProgressbarWithChildren value={item.progresso?.toFixed(0)}>
