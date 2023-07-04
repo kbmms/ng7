@@ -24,6 +24,8 @@ import 'react-date-range/dist/theme/default.css'; // Importe o tema padrão
 import ptBR from "date-fns/locale/pt-BR"; // the locale you want
 
 import {useForm} from 'react-hook-form'
+import apiUrl from '../../../service/apiUrl'
+
 
 function Dashboard() {
   const {
@@ -244,7 +246,7 @@ function Dashboard() {
   useEffect(() => {
     const token = localStorage.getItem('token'); // Obter o token do localStorage
     // Aqui você pode atribuir a resposta JSON à variável `responseJson`
-        axios.get('http://127.0.0.1:3333/extratos/months',{
+        axios.get(`${apiUrl}/extratos/months`,{
           params:{
             startDate: selectedRange[0].startDate?.toISOString().split('T')[0],
             endDate: selectedRange[0].endDate?.toISOString().split('T')[0]
@@ -385,7 +387,7 @@ function Dashboard() {
     const token = localStorage.getItem('token'); // Obter o token do localStorage
 
 
-    axios.get('http://127.0.0.1:3333/extratos', {
+    axios.get(`${apiUrl}/extratos`, {
       params:{
         startDate: selectedRange[0].startDate?.toISOString().split('T')[0],
         endDate: selectedRange[0].endDate?.toISOString().split('T')[0]
@@ -407,7 +409,7 @@ function Dashboard() {
   async function loadCategories(){
 
     const token = localStorage.getItem('token'); // Obter o token do localStorage
-    axios.get('http://127.0.0.1:3333/progresso-categorias', {
+    axios.get(`${apiUrl}/progresso-categorias`, {
       headers: {
         Authorization: `Bearer ${token}`, // Passar o token no cabeçalho da requisição
       },
@@ -466,7 +468,7 @@ function Dashboard() {
   async function loadContaBancarias() {
     try {
         const token = localStorage.getItem('token'); // Obter o token do localStorage
-        const response = await axios.get('http://127.0.0.1:3333/account/search', {
+        const response = await axios.get(`${apiUrl}/account/search`, {
           headers: {
             Authorization: `Bearer ${token}`, // Passar o token no cabeçalho da requisição
           },
@@ -482,7 +484,7 @@ function Dashboard() {
 
   async function handleDeleteConta(id){
     try {
-      const response = await axios.delete(`http://127.0.0.1:3333/account/${id}`)
+      const response = await axios.delete(`${apiUrl}/account/${id}`)
       loadContaBancarias();
     }catch(e){
       alert(e)
@@ -502,7 +504,7 @@ function Dashboard() {
   
   
       const response = await axios.post(
-        'http://127.0.0.1:3333/account',
+        `${apiUrl}/account`,
         {
           nome,
           saldo: saldoNumber, // Passar o saldo como number na requisição
@@ -537,7 +539,7 @@ function Dashboard() {
     const saldoNumber = Number(saldoFormatted); // Converter o saldo formatado para number
 
     console.log(id)
-    const response = await axios.post(`http://127.0.0.1:3333/account/${id}/extrato`, {
+    const response = await axios.post(`${apiUrl}/account/${id}/extrato`, {
    
         descricao,
         categoria,
