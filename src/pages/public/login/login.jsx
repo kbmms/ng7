@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { MainContainerLogin } from './StyleLogin';
+import apiUrl from '../../../service/apiUrl'
 function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -12,7 +13,7 @@ function Login() {
 
     try {
       // Fazer a requisição para autenticar o usuário com as credenciais fornecidas
-      const response = await axios.post('http://127.0.0.1:3333/login', { email, password });
+      const response = await axios.post(`${apiUrl}/login`, { email, password });
 
       // Salvar o token de autenticação no armazenamento local (localStorage) ou em um gerenciador de estado
       const token = response.data.token;
