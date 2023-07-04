@@ -1,5 +1,5 @@
 function currentUrl() {
-	const isLocalHost = window.location.href.includes('127.0.0.1:5173')
+	const isLocalHost = window.location.href.includes('127.')
 	const isHomolog = window.location.href.includes('homolog')
 	const isIP = window.location.href.includes('192.')
 
