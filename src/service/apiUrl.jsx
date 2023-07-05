@@ -5,7 +5,7 @@ function currentUrl() {
 
 	if (isHomolog || isLocalHost || isIP)
 		return 'http://127.0.0.1:3333'
-	return 'https://nodedeploy-api-9ug9.onrender.com'
+	return 'https://postgres-fullstack.onrender.com'
 }
 
 const apiUrl = currentUrl()
