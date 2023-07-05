@@ -2,7 +2,8 @@ import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-d
 import Login from './pages/public/login/login';
 import Dashboard from './pages/private/dashboard/dashboard';
 
-
+import 'bootstrap/dist/css/bootstrap.min.css';
+import "bootstrap/dist/js/bootstrap.bundle.min.js";
 function App() {
   const isAuthenticated = () => {
     // Verificar se o usuário está autenticado

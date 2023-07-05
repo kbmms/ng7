@@ -2,22 +2,23 @@ import { useEffect, useState } from 'react'
 import {Container, Row, Col, Stack, Modal, Button} from 'react-bootstrap'
 import axios from 'axios';
 import '../../../App.css'
-import 'bootstrap/dist/css/bootstrap.min.css';
-import "bootstrap/dist/js/bootstrap.bundle.min.js";
+
 import { MainContainer } from '../../../MainContainer';
 import { List, AppWindow, Airplay, CaretDown, Book, Student, Calendar, PlusCircle, Eye, Bank, ArrowCircleUp, ArrowCircleDown} from "@phosphor-icons/react";
+
 // import GenderChart from '../../../Components/GenderChart'
 // import AgeChart from './Components/AgeChart';
 // import CountryChart from './Components/CountryChart';
 import SpecificUser from '../../../Components/SpecificUsers';
 import ProgressBar from '../../../Components/Progress';
+import SlideProgressBar from '../../../Components/SlideProgress';
 
 import LogoMaster from '../../../assets/img/mastercard.png'
 import LogoVisa from '../../../assets/img/visa.png'
 import LogoPattern from '../../../assets/img/pattern-tree.svg'
 
-import Chart from "react-apexcharts";
 
+import Chart from "react-apexcharts";
 import { DateRangePicker } from 'react-date-range';
 import 'react-date-range/dist/styles.css'; // Importe o arquivo de estilos
 import 'react-date-range/dist/theme/default.css'; // Importe o tema padrão
@@ -28,6 +29,7 @@ import apiUrl from '../../../service/apiUrl'
 
 
 function Dashboard() {
+
   const {
     register:registerForm2,
     setValue:setValue2,
@@ -64,6 +66,8 @@ function Dashboard() {
   const [descricaoDetails, setDescricaoDetails] = useState('')
 
   const [category, setCategory] = useState([])
+
+
   const dataAtual = new Date();
 
   const [selectedRange, setSelectedRange] = useState([
@@ -559,6 +563,14 @@ function Dashboard() {
     
   }
 
+    // Função de callback para atualizar o endpoint do componente pai
+    const updateEndpoint = () => {
+      // Faça a chamada para o endpoint do componente pai aqui
+      // Atualize o estado com os novos dados recebidos
+      loadCategories()
+    };
+  
+
   function openDetailsExtrato (data){
     console.log(data)
     setDescricaoDetails(data.descricao)
@@ -590,32 +602,7 @@ function Dashboard() {
     <Container fluid className=''>
       <Row>
         <aside className='aside'>
-          <div>
-              <nav>
-                <ul>
-                <li>
-                  </li>
-                  <li>
-                    <a href="#" style={{backgroundColor: active ? '#f6f6f6' : ''}}>
-                    <List color={`${active ? '#999':'#fff'}`} size={32} />
-                    <span style={{color: active ? '#999' : ''}}>Dashboard</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#">
-                    <Airplay size={32} color="#fff" />
-                    <span>KPIs</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#">
-                    <AppWindow size={32} color="#fff" />
-                    <span>Instituitions</span>
-                    </a>
-                  </li>
-                </ul>
-              </nav>
-          </div>
+          <SlideProgressBar data={category} updateEndpoint={updateEndpoint}/>
         </aside>
         <Col className='m-0 main-box'>
 

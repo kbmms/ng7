@@ -5,7 +5,7 @@ export const MainContainer = styled.div`
 
   .aside {
     background: #828f9d;
-    width:100px;
+    width:237px;
     height:100vh;
     margin:0;
     padding:0;
@@ -132,7 +132,10 @@ export const MainContainer = styled.div`
   }
   @media(max-width:1081px){
     .aside {
-      display: none;
+      /* display: none; */
+      position:fixed;
+      z-index:99999;
+      height: unset;
     }
     .datagrid {
       overflow:auto !important;
@@ -230,6 +233,13 @@ export const MainContainer = styled.div`
       grid-template-columns:  1fr 1fr 1fr 1fr !important;
       gap:30px;
       overflow:auto;
+    }
+    .input-estimated-value {
+      width: 100%;
+      padding: 10px 0;
+      background: #75889d;
+      border: none;
+  
     }
 
 `;

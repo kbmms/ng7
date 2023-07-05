@@ -5,32 +5,42 @@ import axios from 'axios';
 import apiUrl from '../service/apiUrl'
 
 import { CreditCard, WifiHigh,ShoppingCart, Bus, FirstAidKit, Book, Student, Calendar, BeerStein, HandHeart, Bank, PiggyBank, Gift} from "@phosphor-icons/react";
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 
-export default function ProgressBar({data}){
+export default function SlideProgressBar({data, updateEndpoint }){
+    let timeOutSearch = useRef(null)
+    const inputNameRef = useRef(null);
     const [openEstimatedItemModal, setOpenEstimatedItemModal] = useState(false);
 
 
-    async function handleEstimatedValueX(categoryId, userId){
+    async function handleEstimatedValue(estimatedValue, categoryId, userId){
+
         const token = localStorage.getItem('token'); // Obter o token do localStorage
-  
+
+        if(timeOutSearch.current){
+            clearInterval(timeOutSearch.current)
+        }
+        timeOutSearch.current = window.setTimeout( async ()=>{
         try {
           const response = await axios.post(`${apiUrl}/estimated-values`, {
                 categoryId:categoryId,
-                value:2500,
+                value:Number(estimatedValue),
                 userId: Number(userId),
           }, {
             headers: {
               Authorization: `Bearer ${token}`, // Passar o token no cabeçalho da requisição
             },
           });
+          updateEndpoint();
         } catch (error) {
           console.log(error);
           // Tratar o erro de acordo com a necessidade
         }
+    }, 1100)
     }
+
     return(
-        <div className='progress-box-main'>
+        <div className='slide-progress-box-main'>
             {data?.map((item)=> {
                 if (item.estimatedValue === 0) {
                     return null; // Retorna null para não renderizar o item
@@ -65,15 +75,15 @@ export default function ProgressBar({data}){
 
                 return (
                
-                     <div style={{ width: 100, height: 130, display:'flex',flexDirection:'column', justifyContent:'center', alignItems:'center', position:'relative' }}
-                      onClick={() => handleEstimatedValue(item.id, item.userId)}>
-                        <CircularProgressbarWithChildren value={item.progresso?.toFixed(0)}>
-                             <p style={{fontSize:'10px', position:'absolute', bottom:'85px', fontWeight:'bold', color:'#9E9E9E'}}>{item.label}</p>
+                     <div style={{background:'#697484', marginBottom:'10px', color:'#fff', width:'100%', height: 130, display:'flex',flexDirection:'column', justifyContent:'center', alignItems:'center', position:'relative' }}
+                      >
+                        
+                             <p style={{fontSize:'10px',  fontWeight:'bold', color:'#CDDC39'}}>{item.label}</p>
                             {Icon && <Icon size={35} style={{ marginBottom: 10 }} />}
-                            <div style={{ fontSize: 12, marginTop: -5 }}>
-                                <strong>{item.progresso?.toFixed(0)}%</strong>
+                            <div style={{ width:'100%', fontSize: 12, marginTop: -5}}>
+                               <input className='input-estimated-value' type='text' placeholder='R$ 00,00' defaultValue={item?.estimatedValues[0]?.value} ref={inputNameRef}  onChange={(estimatedValue) => handleEstimatedValue(estimatedValue.target.value, item.id, item.userId)} />
                             </div>
-                        </CircularProgressbarWithChildren>
+                        
                     </div>
                  
                 );
