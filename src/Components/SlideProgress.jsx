@@ -75,7 +75,7 @@ export default function SlideProgressBar({data, updateEndpoint }){
 
                 return (
                
-                     <div style={{background:'#697484', marginBottom:'10px', color:'#fff', width:'100%', height: 130, display:'flex',flexDirection:'column', justifyContent:'center', alignItems:'center', position:'relative' }}
+                     <div style={{background:'rgb(105 116 132 / 31%)', marginBottom:'10px', color:'#fff', width:'100%', height: 130, display:'flex',flexDirection:'column', justifyContent:'center', alignItems:'center', position:'relative' }}
                       >
                         
                              <p style={{fontSize:'10px',  fontWeight:'bold', color:'#CDDC39'}}>{item.label}</p>

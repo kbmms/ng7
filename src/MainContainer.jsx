@@ -4,7 +4,7 @@ export const MainContainer = styled.div`
   background-color: #999;
 
   .aside {
-    background: #828f9d;
+    background: #9094988a;
     width:237px;
     height:100vh;
     margin:0;
@@ -133,6 +133,7 @@ export const MainContainer = styled.div`
   @media(max-width:1081px){
     .aside {
       /* display: none; */
+      background:'#9094988a' !important;
       position:fixed;
       z-index:99999;
       height: unset;
