@@ -4,7 +4,7 @@ import axios from 'axios';
 import '../../../App.css'
 
 import { MainContainer } from '../../../MainContainer';
-import { List, AppWindow, Airplay, CaretDown, Book, Student, Calendar, PlusCircle, Eye, Bank, ArrowCircleUp, ArrowCircleDown} from "@phosphor-icons/react";
+import { List, AppWindow, Airplay, CaretDown, Book, Student, Calendar, PlusCircle, Eye, Bank, ArrowCircleUp, ArrowCircleDown, Gear} from "@phosphor-icons/react";
 
 // import GenderChart from '../../../Components/GenderChart'
 // import AgeChart from './Components/AgeChart';
@@ -69,6 +69,16 @@ function Dashboard() {
 
 
   const dataAtual = new Date();
+
+  const [isMenuOpen, setMenuOpen] = useState(false);
+
+  const openMenu = () => {
+    setMenuOpen(true);
+  };
+
+  const closeMenu = () => {
+    setMenuOpen(false);
+  };
 
   const [selectedRange, setSelectedRange] = useState([
     {
@@ -601,9 +611,9 @@ function Dashboard() {
     <MainContainer>
     <Container fluid className=''>
       <Row>
-        <aside className='aside'>
-          <SlideProgressBar data={category} updateEndpoint={updateEndpoint}/>
-        </aside>
+ 
+          <SlideProgressBar data={category} updateEndpoint={updateEndpoint} isMenuOpen={isMenuOpen} openMenu={openMenu} closeMenu={closeMenu}/>
+  
         <Col className='m-0 main-box'>
 
 
@@ -705,6 +715,7 @@ function Dashboard() {
                 <div className="card-header pb-0 p-3">
                   <div className="row">
                     <div className="col-6 d-flex align-items-center">
+                      <Gear size={20} color='#999' weight='light'  onClick={openMenu} />
                       <h6 className="mb-0"  style={{color: '#f26969'}}>Desempenho</h6>
                     </div>
                     <div className="col-6 text-end">
@@ -734,29 +745,13 @@ function Dashboard() {
                       <h6 className="mb-0"  style={{color: '#f26969'}}>Despesas por Categorias</h6>
                     </div>
                     <div className="col-6 text-end">
-                      {/* <a className="btn bg-gradient-dark mb-0" href="javascript:;">
-                        <PlusCircle size={28} color="#999" weight="light" />
-                      &nbsp;&nbsp;Add New Card
-                      </a> */}
+
                     </div>
                   </div>
                 </div>
                 <div className="card-body p-3">
                   <div className="row">
-                    {/* <div className="col-md-6 mb-md-0 mb-4">
-                      <div className="card card-body border card-plain border-radius-lg d-flex align-items-center flex-row">
-                        <img className="w-10 me-3 mb-0" src={LogoMaster} alt="logo" />
-                        <h6 className="mb-0">****&nbsp;&nbsp;&nbsp;****&nbsp;&nbsp;&nbsp;****&nbsp;&nbsp;&nbsp;7852</h6>
-                        <i className="material-icons ms-auto text-dark cursor-pointer" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit Card">edit</i>
-                      </div>
-                    </div> */}
-                    {/* <div className="col-md-6">
-                      <div className="card card-body border card-plain border-radius-lg d-flex align-items-center flex-row">
-                        <img className="w-10 me-3 mb-0" src={LogoVisa} alt="logo" />
-                        <h6 className="mb-0">****&nbsp;&nbsp;&nbsp;****&nbsp;&nbsp;&nbsp;****&nbsp;&nbsp;&nbsp;5248</h6>
-                        <i className="material-icons ms-auto text-dark cursor-pointer" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit Card">edit</i>
-                      </div>
-                    </div> */}
+
                     <Chart
                       options={optionsCategoria}
                       series={seriesCategoria}
@@ -842,22 +837,6 @@ function Dashboard() {
       </div>
 
           </Row>
-
-
-
-
-          {/* <Row>
-              <div className='card-main-extrato card-two-separate datagrid'>
-                <h2 style={{fontSize:'24px', color:'#918b8b', marginBottom:'20px', padding:'10px 20px'}}>Extrato</h2>
-                <div className='card-main-item'>
-                <SpecificUser data={extrato} />
-                </div>
-            </div>
-          </Row>
- */}
-
-
-
 
         </Col>
       </Row>

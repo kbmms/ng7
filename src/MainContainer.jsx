@@ -238,9 +238,54 @@ export const MainContainer = styled.div`
     .input-estimated-value {
       width: 100%;
       padding: 10px 0;
-      background: #75889d;
+      background: #ff675c;
       border: none;
+      color: #fff;
+      font-weight: bold;
   
     }
+    .slide-progress-box-main {
+      position:fixed;
+      z-index:9999;
+      background: #ffececba;
+    }
+    .menu {
+      transition: transform 0.3s ease;
+    }
 
+    .open {
+      transform: translateX(0);
+    }
+
+    .closed {
+      transform: translateX(-100%);
+    }
+    .close-slide-progress {
+      width: 100%;
+      padding: 10px;
+      border: none;
+      margin: 8px 0;
+      background: #FF5722;
+      color: #fff;
+      font-weight: bold;
+    }
+    .box-slide-progress-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr 1fr;
+      gap: 10px;
+    }
+    .item-progress {
+      background: #F44336;
+      margin-bottom: 10px;
+      color: rgb(255, 255, 255);
+      width: 100%;
+      height: 130px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      padding: 5px;
+      border-radius: 5px;
+    }
 `;

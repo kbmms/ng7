@@ -7,7 +7,7 @@ import apiUrl from '../service/apiUrl'
 import { CreditCard, WifiHigh,ShoppingCart, Bus, FirstAidKit, Book, Student, Calendar, BeerStein, HandHeart, Bank, PiggyBank, Gift} from "@phosphor-icons/react";
 import { useState, useRef } from 'react';
 
-export default function SlideProgressBar({data, updateEndpoint }){
+export default function SlideProgressBar({data, updateEndpoint, isMenuOpen, openMenu, closeMenu }){
     let timeOutSearch = useRef(null)
     const inputNameRef = useRef(null);
     const [openEstimatedItemModal, setOpenEstimatedItemModal] = useState(false);
@@ -40,7 +40,9 @@ export default function SlideProgressBar({data, updateEndpoint }){
     }
 
     return(
-        <div className='slide-progress-box-main'>
+        <div className={`slide-progress-box-main menu ${isMenuOpen ? 'open' : 'closed'}`}>
+            <button onClick={closeMenu} className='close-slide-progress'>Fechar</button>
+            <div className='box-slide-progress-grid'>
             {data?.map((item)=> {
                 if (item.estimatedValue === 0) {
                     return null; // Retorna null para não renderizar o item
@@ -75,7 +77,7 @@ export default function SlideProgressBar({data, updateEndpoint }){
 
                 return (
                
-                     <div style={{background:'rgb(105 116 132 / 31%)', marginBottom:'10px', color:'#fff', width:'100%', height: 130, display:'flex',flexDirection:'column', justifyContent:'center', alignItems:'center', position:'relative' }}
+                     <div className='item-progress'
                       >
                         
                              <p style={{fontSize:'10px',  fontWeight:'bold', color:'#CDDC39'}}>{item.label}</p>
@@ -88,6 +90,7 @@ export default function SlideProgressBar({data, updateEndpoint }){
                  
                 );
             })}
+            </div>
         </div>
     )
 }
