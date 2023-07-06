@@ -231,7 +231,7 @@ export const MainContainer = styled.div`
     }
     .progress-box-main {
       display:grid !important;
-      grid-template-columns:  1fr 1fr 1fr 1fr !important;
+      grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr !important;
       gap:30px;
       overflow:auto;
     }
