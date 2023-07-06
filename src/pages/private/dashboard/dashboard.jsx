@@ -257,121 +257,119 @@ function Dashboard() {
     }
   ]);
 
-  useEffect(() => {
-    const token = localStorage.getItem('token'); // Obter o token do localStorage
-    // Aqui você pode atribuir a resposta JSON à variável `responseJson`
-        axios.get(`${apiUrl}/extratos/months`,{
-          params:{
-            startDate: selectedRange[0].startDate?.toISOString().split('T')[0],
-            endDate: selectedRange[0].endDate?.toISOString().split('T')[0]
-          },
-          headers: {
-            Authorization: `Bearer ${token}`, // Passar o token no cabeçalho da requisição
-          },
-        })
-      .then(response => {
-        const extratosPorMes = response.data.extratosPorMes;
-        setExtratoByMonth(extratosPorMes);
-        
-        // Extrair as chaves do objeto e ordená-las em ordem crescente
-        const chaves = Object.keys(extratosPorMes).sort();
+  function loadGraphSaidaEntrada(){
 
-                // Extrair as chaves do objeto e ordená-las em ordem crescente
-                const chavesEntrada = Object.keys(extratosPorMes).sort();
-
-
-        
-        // Filtrar as chaves para incluir apenas os meses/anos que possuem extratos do tipo 'saida'
-        const filteredChaves = chaves.filter(chave =>
-          extratosPorMes[chave].some(extrato => extrato.tipo === 'saida')
-        );
-
+      const token = localStorage.getItem('token'); // Obter o token do localStorage
+      // Aqui você pode atribuir a resposta JSON à variável `responseJson`
+          axios.get(`${apiUrl}/extratos/months`,{
+            params:{
+              startDate: selectedRange[0].startDate?.toISOString().split('T')[0],
+              endDate: selectedRange[0].endDate?.toISOString().split('T')[0]
+            },
+            headers: {
+              Authorization: `Bearer ${token}`, // Passar o token no cabeçalho da requisição
+            },
+          })
+        .then(response => {
+          const extratosPorMes = response.data.extratosPorMes;
+          setExtratoByMonth(extratosPorMes);
+          
+          // Extrair as chaves do objeto e ordená-las em ordem crescente
+          const chaves = Object.keys(extratosPorMes).sort();
+  
+                  // Extrair as chaves do objeto e ordená-las em ordem crescente
+                  const chavesEntrada = Object.keys(extratosPorMes).sort();
+  
+  
+          
           // Filtrar as chaves para incluir apenas os meses/anos que possuem extratos do tipo 'saida'
-          const filteredChavesEntradas = chavesEntrada.filter(chave =>
-            extratosPorMes[chave].some(extrato => extrato.tipo === 'entrada')
+          const filteredChaves = chaves.filter(chave =>
+            extratosPorMes[chave].some(extrato => extrato.tipo === 'saida')
           );
-
-        // Formatar as chaves filtradas como strings no formato "mês/ano"
-        const categories = filteredChaves.map(chave => {
-          const [ano, mes] = chave.split('-');
-          return `${mes}/${ano}`;
-        });
-
-
+  
+            // Filtrar as chaves para incluir apenas os meses/anos que possuem extratos do tipo 'saida'
+            const filteredChavesEntradas = chavesEntrada.filter(chave =>
+              extratosPorMes[chave].some(extrato => extrato.tipo === 'entrada')
+            );
+  
           // Formatar as chaves filtradas como strings no formato "mês/ano"
-          const categoriesEntrada = filteredChavesEntradas.map(chave => {
+          const categories = filteredChaves.map(chave => {
             const [ano, mes] = chave.split('-');
             return `${mes}/${ano}`;
           });
-
-        // Obter a soma dos valores dos arrays de extratos do tipo 'saida' correspondentes a cada chave
-        const data = filteredChaves.map(chave => {
-          const soma = extratosPorMes[chave]
-            .filter(extrato => extrato.tipo === 'saida')
-            .reduce((acc, extrato) => acc + extrato.valor, 0);
-          return soma;
-        });
-        
-        const dataEntradas = filteredChavesEntradas.map(chave => {
-          const soma = extratosPorMes[chave]
-            .filter(extrato => extrato.tipo === 'entrada')
-            .reduce((acc, extrato) => acc + extrato.valor, 0);
-          return soma;
-        });
-        
-
-      
-        console.log('data', data)
-        // Atualizar o estado
-        setOptions(prevOptions => ({
-          ...prevOptions,
-          xaxis: {
-            ...prevOptions.xaxis,
-            categories
-          }
-        }));
-
-
-        setOptionsEntrada(prevOptions => ({
-          ...prevOptions,
-          xaxis: {
-            ...prevOptions.xaxis,
-            categories: categoriesEntrada
-          }
-        }));
-      
-
-
-
-
-
-
-        setSeries(prevSeries => [
-          {
-            ...prevSeries[0],
-            data
-          }
-        ]);
-
-
-              
-        setSeriesEntradas(prevSeries => [
-          {
-            ...prevSeries[0],
-            data: dataEntradas
-          }
-        ]);
-
-        
-      })
-      .catch(error => {
-        console.log(error);
-      });
   
-
-
-
-  }, [selectedRange[0].startDate, selectedRange[0].endDate]);
+  
+            // Formatar as chaves filtradas como strings no formato "mês/ano"
+            const categoriesEntrada = filteredChavesEntradas.map(chave => {
+              const [ano, mes] = chave.split('-');
+              return `${mes}/${ano}`;
+            });
+  
+          // Obter a soma dos valores dos arrays de extratos do tipo 'saida' correspondentes a cada chave
+          const data = filteredChaves.map(chave => {
+            const soma = extratosPorMes[chave]
+              .filter(extrato => extrato.tipo === 'saida')
+              .reduce((acc, extrato) => acc + extrato.valor, 0);
+            return soma;
+          });
+          
+          const dataEntradas = filteredChavesEntradas.map(chave => {
+            const soma = extratosPorMes[chave]
+              .filter(extrato => extrato.tipo === 'entrada')
+              .reduce((acc, extrato) => acc + extrato.valor, 0);
+            return soma;
+          });
+          
+  
+        
+          console.log('data', data)
+          // Atualizar o estado
+          setOptions(prevOptions => ({
+            ...prevOptions,
+            xaxis: {
+              ...prevOptions.xaxis,
+              categories
+            }
+          }));
+  
+  
+          setOptionsEntrada(prevOptions => ({
+            ...prevOptions,
+            xaxis: {
+              ...prevOptions.xaxis,
+              categories: categoriesEntrada
+            }
+          }));
+        
+  
+  
+  
+  
+  
+  
+          setSeries(prevSeries => [
+            {
+              ...prevSeries[0],
+              data
+            }
+          ]);
+  
+  
+                
+          setSeriesEntradas(prevSeries => [
+            {
+              ...prevSeries[0],
+              data: dataEntradas
+            }
+          ]);
+  
+          
+        })
+        .catch(error => {
+          console.log(error);
+        });
+    
+  }
 
 
 
@@ -394,6 +392,7 @@ function Dashboard() {
     loadExtratos()
     loadExtratosByMonth()
     loadCategories()
+    loadGraphSaidaEntrada()
     // loadExtratoByCategory()
   }, [selectedRange[0].startDate, selectedRange[0].endDate]);
 
@@ -570,6 +569,7 @@ function Dashboard() {
     loadExtratos()
     loadExtratosByMonth()
     loadCategories()
+    loadGraphSaidaEntrada()
     
   }
 
