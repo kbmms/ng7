@@ -288,4 +288,7 @@ export const MainContainer = styled.div`
       padding: 5px;
       border-radius: 5px;
     }
+    .input-estimated-value::placeholder {
+      color:#fff;
+    }
 `;

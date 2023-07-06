@@ -69,7 +69,7 @@ export default function ProgressBar({data}){
                       onClick={() => handleEstimatedValue(item.id, item.userId)}>
                         <CircularProgressbarWithChildren value={item.progresso?.toFixed(0)}>
                              <p style={{fontSize:'10px', position:'absolute', bottom:'85px', fontWeight:'bold', color:'#9E9E9E'}}>{item.label}</p>
-                            {Icon && <Icon size={35} style={{ marginBottom: 10 }} />}
+                            {Icon && <Icon size={15} style={{ marginBottom: 10 }} />}
                             <div style={{ fontSize: 12, marginTop: -5 }}>
                                 <strong>{item.progresso?.toFixed(0)}%</strong>
                             </div>

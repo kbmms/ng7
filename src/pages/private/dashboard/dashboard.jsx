@@ -87,6 +87,7 @@ function Dashboard() {
       key: 'selection'
     }
   ]);
+
   useEffect(() => {
     const resumoCategory = {};
 
@@ -114,7 +115,7 @@ function Dashboard() {
 
     setDadosGrafico(novoDadosGrafico);
   }, [extrato]);
-  console.log('teste', dadosGrafico)
+ 
 
   const optionsCategoria = {
     chart: {
@@ -239,11 +240,6 @@ function Dashboard() {
       },
     },
   })
-
-
-  
-
-
   
 
   const [series, setSeries] = useState([{
@@ -372,9 +368,6 @@ function Dashboard() {
   }
 
 
-
-
-  
   const handleClose = () => setShow(false);
   const handleCloseDetails = () => setShowDetailsExtrato(false);
 
@@ -390,7 +383,6 @@ function Dashboard() {
   useEffect(() => {
     loadContaBancarias()
     loadExtratos()
-    loadExtratosByMonth()
     loadCategories()
     loadGraphSaidaEntrada()
     // loadExtratoByCategory()
@@ -441,42 +433,6 @@ function Dashboard() {
       });
   }
 
-  
-  
-  // function loadExtratoByCategory(){
-  //   const resumoCategory = {};
-
-  //   extrato?.forEach((objeto) => {
-  //     const {categoria, valor} = objeto
-
-  //     if(!resumoCategory[categoria]) {
-  //       resumoCategory[categoria] = 0;
-  //     }
-      
-  //     resumoCategory[categoria] += valor
-
-  //   });
-    
-  //   const dadosGrafico = Object.keys(resumoCategory).map(categoria => ({
-  //     categoria,
-  //     total: resumoCategory[categoria]
-  //   }));
-  //   setGraficoCategoria(dadosGrafico)
-  //   console.log(dadosGrafico)
-  // }
-  // console.log('tt', graficoCategoria)
-
-  
-  async function loadExtratosByMonth(){
-    // axios.get('http://127.0.0.1:3333/extratos/months')
-    //   .then(response => {
-    //     const extratos = response.data.extratosPorMes;
-    //     setExtratoByMonth(extratos);
-    //   })
-    //   .catch(error => {
-    //     console.log(error);
-    //   });
-  }
 
   async function loadContaBancarias() {
     try {
