@@ -714,9 +714,9 @@ function Dashboard() {
               <div className="card mt-4">
                 <div className="card-header pb-0 p-3">
                   <div className="row">
-                    <div className="col-12 d-flex align-items-center" onClick={openMenu} style={{cursor:'pointer'}}>
-                      <Gear size={20} color='#999' weight='light'   />
+                    <div className="col-12 d-flex align-items-center justify-content-between" onClick={openMenu} style={{cursor:'pointer'}}>
                       <h6 className="mb-0"  style={{color: '#f26969'}}>Quanto você planeja gastar em cada categoria durante este período? <br /></h6>
+                      <Gear size={30} color='#999' weight='light'   />
                     </div>
                     <div className="col-6 text-end">
 
