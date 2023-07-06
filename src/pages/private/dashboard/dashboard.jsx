@@ -714,9 +714,9 @@ function Dashboard() {
               <div className="card mt-4">
                 <div className="card-header pb-0 p-3">
                   <div className="row">
-                    <div className="col-6 d-flex align-items-center">
-                      <Gear size={20} color='#999' weight='light'  onClick={openMenu} />
-                      <h6 className="mb-0"  style={{color: '#f26969'}}>Desempenho</h6>
+                    <div className="col-12 d-flex align-items-center" onClick={openMenu} style={{cursor:'pointer'}}>
+                      <Gear size={20} color='#999' weight='light'   />
+                      <h6 className="mb-0"  style={{color: '#f26969'}}>Quanto você planeja gastar em cada categoria durante este período? <br /></h6>
                     </div>
                     <div className="col-6 text-end">
 
@@ -727,6 +727,7 @@ function Dashboard() {
                   <div className="row">
                         <ProgressBar data={category} />
                   </div>
+                  <span style={{fontSize:"12px", color:"#999"}}>Isso ajudará a acompanhar seu progresso e comparar com seus gastos reais.</span>
                 </div>
               </div>
             </div>
