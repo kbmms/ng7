@@ -31,10 +31,10 @@ function Login() {
       navigate('/dashboard');
     } catch (error) {
       console.error(error);
-      setIsLoadingLogin(true)
+      setIsLoadingLogin(false)
       // Tratar erros de login
     }
-    setIsLoadingLogin(true)
+    setIsLoadingLogin(false)
   };
 
   
