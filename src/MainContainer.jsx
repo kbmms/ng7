@@ -3,6 +3,7 @@ import styled from 'styled-components';
 export const MainContainer = styled.div`
   background-color: #999;
 
+
   .aside {
     background: #9094988a;
     width:237px;

@@ -4,11 +4,8 @@ import axios from 'axios';
 import '../../../App.css'
 
 import { MainContainer } from '../../../MainContainer';
-import { List, AppWindow, Airplay, CaretDown, Book, Student, Calendar, PlusCircle, Eye, Bank, ArrowCircleUp, ArrowCircleDown, Gear} from "@phosphor-icons/react";
+import { Calendar, PlusCircle, Eye, Bank, ArrowCircleUp, ArrowCircleDown, Gear} from "@phosphor-icons/react";
 
-// import GenderChart from '../../../Components/GenderChart'
-// import AgeChart from './Components/AgeChart';
-// import CountryChart from './Components/CountryChart';
 import SpecificUser from '../../../Components/SpecificUsers';
 import ProgressBar from '../../../Components/Progress';
 import SlideProgressBar from '../../../Components/SlideProgress';
@@ -890,7 +887,7 @@ function Dashboard() {
                                       })}/>
                                       {errorsForm2.saldo && <span  className="msgs-error-validate">{errorsForm2.saldo.message}</span> }
                   <br/>
-                  <Button type="submit">Cadastrar</Button>
+                  <Button className='custom-send-btn' type="submit">Cadastrar</Button>
                 </form>
               </Row>
         </Modal.Body>

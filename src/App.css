@@ -27922,3 +27922,9 @@
     }
   }
   
+  .custom-send-btn {
+    background: #42ef65 !important;
+    font-size: 12px  !important;
+    margin-top: 15px  !important;
+    color: #fff  !important;
+  }
