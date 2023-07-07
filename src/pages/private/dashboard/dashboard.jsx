@@ -170,17 +170,17 @@ function Dashboard() {
 
 
   
-  function formatarData(dataString) {
-    const data = new Date(dataString);
+  function formatarData(data) {
+    const dataObj = new Date(data);
+    const dia = String(dataObj.getDate()).padStart(2, '0');
+    const mes = String(dataObj.getMonth() + 1).padStart(2, '0');
+    const ano = String(dataObj.getFullYear());
+    const horas = String(dataObj.getUTCHours()).padStart(2, '0');
+    const minutos = String(dataObj.getUTCMinutes()).padStart(2, '0');
   
-    const dia = String(data.getDate()).padStart(2, '0');
-    const mes = String(data.getMonth() + 1).padStart(2, '0');
-    const ano = data.getFullYear();
-    const hora = String(data.getHours()).padStart(2, '0');
-    const minuto = String(data.getMinutes()).padStart(2, '0');
-  
-    return `${dia}/${mes}/${ano} ás ${hora}:${minuto}`;
+    return `${dia}/${mes}/${ano} ${horas}:${minutos}`;
   }
+  
  
 
   const [options, setOptions] = useState({
