@@ -6,11 +6,12 @@ import apiUrl from '../../../service/apiUrl'
 function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [isLoadingLogin, setIsLoadingLogin] = useState(false);
   const navigate = useNavigate();
 
   const handleLogin = async (e) => {
     e.preventDefault();
-
+    setIsLoadingLogin(true)
     try {
       // Fazer a requisição para autenticar o usuário com as credenciais fornecidas
       const response = await axios.post(`${apiUrl}/login`, { email, password });
@@ -30,10 +31,13 @@ function Login() {
       navigate('/dashboard');
     } catch (error) {
       console.error(error);
+      setIsLoadingLogin(true)
       // Tratar erros de login
     }
+    setIsLoadingLogin(true)
   };
 
+  
   return (
     <MainContainerLogin>
       <div className='card-login col-10 col-md-4 col-lg-3'>
@@ -52,7 +56,7 @@ function Login() {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
-            <button type="submit">Login</button>
+            <button type="submit" className='btn-login'>Login {isLoadingLogin &&  <div class="custom-loader"></div>}</button>
           </form>
         </div>
       </div>

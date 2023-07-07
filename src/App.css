@@ -27923,8 +27923,24 @@
   }
   
   .custom-send-btn {
-    background: #42ef65 !important;
-    font-size: 12px  !important;
-    margin-top: 15px  !important;
-    color: #fff  !important;
+    background: #42ef65!important;
+    font-size: 14px!important;
+    margin-top: 15px!important;
+    color: #fff!important;
+    font-weight: bold !important;
   }
+  .btn-login {
+    position: relative;
+  }
+  .custom-loader {
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    border: 8px solid;
+    border-color: #ffffff #0000;
+    animation: s1 1s infinite;
+    position: absolute;
+    right: 12px;
+    bottom: 8px;
+  }
+  @keyframes s1 {to{transform: rotate(.5turn)}}
