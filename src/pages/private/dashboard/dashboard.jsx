@@ -523,7 +523,6 @@ function Dashboard() {
     setShowEntradaExtrato(false)
     loadContaBancarias()
     loadExtratos()
-    loadExtratosByMonth()
     loadCategories()
     loadGraphSaidaEntrada()
     
