@@ -503,7 +503,11 @@ function Dashboard() {
   
 
   async function handleEntradaExtrato(){
-    const saldoFloat = parseFloat(valor); // Converter o saldo para float
+
+
+    const saldoLimpo = valor.replace(/\D/g, '');
+
+    const saldoFloat = parseFloat(saldoLimpo); // Converter o saldo para float
     const saldoFormatted = (saldoFloat / 100).toFixed(2); // Formatar o saldo com duas casas decimais e converter para reais
     const saldoNumber = Number(saldoFormatted); // Converter o saldo formatado para number
 
@@ -540,6 +544,24 @@ function Dashboard() {
     console.log(data)
     setDescricaoDetails(data.descricao)
     setShowDetailsExtrato(true)
+  }
+
+  function changeToCurrency(event){
+    const {name, value} = event.target;
+    // Remove todos os caracteres que não sejam dígitos
+    const valorFormatado = value.replace(/\D/g, '');
+
+    // Adiciona a vírgula somente quando o terceiro dígito é digitado
+    let valorComPonto = '';
+    if (valorFormatado.length >= 3) {
+      const valorInteiro = valorFormatado.slice(0, -2);
+      const valorDecimal = valorFormatado.slice(-2);
+      valorComPonto = valorInteiro.replace(/\B(?=(\d{3})+(?!\d))/g, '.') + ',' + valorDecimal;
+    } else {
+      valorComPonto = valorFormatado;
+    }
+
+    setValor(valorComPonto);
   }
 
 
@@ -670,7 +692,7 @@ function Dashboard() {
                 <div className="card-header pb-0 p-3">
                   <div className="row">
                     <div className="col-12 d-flex align-items-center justify-content-between" onClick={openMenu} style={{cursor:'pointer'}}>
-                      <h6 className="mb-0"  style={{color: '#f26969'}}>Quanto você planeja gastar em cada categoria durante este período? <br /></h6>
+                      <h6 className="mb-0"  style={{color: '#f26969'}}>Clique para adicionar quanto você planeja gastar em cada categoria.<br /></h6>
                       <Gear size={30} color='#999' weight='light'   />
                     </div>
                     <div className="col-6 text-end">
@@ -895,7 +917,7 @@ function Dashboard() {
               <Row>
                 <form>
                   <label htmlFor='seu-valor'>Valor</label>
-                  <input type="text" id="seu-banco" className='form-control' placeholder='Insira o valor' value={valor} onChange={(e) => setValor(e.target.value)}/>
+                  <input type="text" id="seu-banco" className='form-control' placeholder='Insira o valor' name="valor" value={valor} onChange={(e) => changeToCurrency(e)}/>
                   <br/>
 
                   <label htmlFor='seu-tipo'>Tipo</label>
