@@ -27936,6 +27936,7 @@
     display:flex;
     align-items:center;
     justify-content:center;
+    height:100vh;
   }
   .dashboard-loading-box .custom-loader {
     position:relative;

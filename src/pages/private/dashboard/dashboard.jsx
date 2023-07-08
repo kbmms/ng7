@@ -636,6 +636,8 @@ function Dashboard() {
           <h6>{selectedRange[0].startDate.toLocaleDateString('pt-br', { year: 'numeric', month: 'long', day: 'numeric'})} - {selectedRange[0].endDate.toLocaleDateString('pt-br', { year: 'numeric', month: 'long', day: 'numeric'})}</h6>
           </Row>
           
+
+            <div className="row">
           {isLoadingAll ? 
           (
             <div className='dashboard-loading-box'>
@@ -643,9 +645,8 @@ function Dashboard() {
             </div>
           ):
           (
-
-            <div className="row">
-              <div className="col-lg-8">
+            <>
+            <div className="col-lg-8">
             <div className="row">
               <div className="col-xl-6 mb-xl-0 mb-4">
 
@@ -842,14 +843,16 @@ function Dashboard() {
               </div>
             </div>
               </div>
-          </div>
+              </>
           )
           }
+          </div>
 
           </Row>
 
         </Col>
       </Row>
+      
     </Container>
 
 
