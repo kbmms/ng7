@@ -149,8 +149,6 @@ function Dashboard() {
     { value: 'cartao', label: 'Cartão de Crédito' },
     { value: 'aluguel', label: 'Aluguel' },
     { value: 'vendas', label: 'Vendas' },
-    { value: 'moradia', label: 'Moradia' },
-    { value: 'contas_servicos_publicos', label: 'Contas de Serviços Públicos' },
     { value: 'telefone_internet', label: 'Telefone e Internet' },
     { value: 'seguro', label: 'Seguro' },
     { value: 'impostos', label: 'Impostos' },
@@ -163,7 +161,6 @@ function Dashboard() {
     { value: 'cuidados_pessoais', label: 'Cuidados Pessoais' },
     { value: 'dividas_emprestimos', label: 'Dívidas e Empréstimos' },
     { value: 'investimentos', label: 'Investimentos' },
-    { value: 'doacoes_caridade', label: 'Doações e Caridade' },
     { value: 'outros', label: 'Outros' },
   ];
 
