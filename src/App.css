@@ -27941,6 +27941,7 @@
   .dashboard-loading-box .custom-loader {
     position:relative;
     border-color: #000000 #0000;
+    right: 0;
   }
   .custom-loader {
     width: 25px;

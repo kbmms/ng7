@@ -606,7 +606,7 @@ function Dashboard() {
 
 
 
-          <Row>
+
           <Row>
           <div className='header-main' style={{alignItems:'center'}}>
             <div>
@@ -848,7 +848,7 @@ function Dashboard() {
           }
           </div>
 
-          </Row>
+        
 
         </Col>
       </Row>
