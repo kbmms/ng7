@@ -41,6 +41,9 @@ function Dashboard() {
   const [showEntradaExtrato, setShowEntradaExtrato] = useState(false);
   const [showDetailsExtrato, setShowDetailsExtrato] = useState(false);
 
+  const [isLoadingAll, setIsLoadingAll] = useState(false);
+  const [isLoadingExtrato, setIsLoadingExtrato] = useState(false);
+
 
   const [bankData, setBankData] = useState([]);
 
@@ -378,12 +381,18 @@ function Dashboard() {
 
   
   useEffect(() => {
-    loadContaBancarias()
-    loadExtratos()
-    loadCategories()
-    loadGraphSaidaEntrada()
-    // loadExtratoByCategory()
+    const fetchData = async () => {
+      setIsLoadingAll(true);
+      await loadContaBancarias();
+      await loadExtratos();
+      await loadCategories();
+      await loadGraphSaidaEntrada();
+      setIsLoadingAll(false);
+    };
+  
+    fetchData();
   }, [selectedRange[0].startDate, selectedRange[0].endDate]);
+  
 
   async function loadExtratos(){
     const token = localStorage.getItem('token'); // Obter o token do localStorage
@@ -509,6 +518,8 @@ function Dashboard() {
     const saldoNumber = Number(saldoFormatted); // Converter o saldo formatado para number
 
     console.log(id)
+
+    setIsLoadingExtrato(true)
     const response = await axios.post(`${apiUrl}/account/${id}/extrato`, {
    
         descricao,
@@ -517,6 +528,8 @@ function Dashboard() {
         tipo,
       
     })
+    setIsLoadingExtrato(false)
+
     setDescricao('')
     setValor('')
     setTipo('')
@@ -622,194 +635,216 @@ function Dashboard() {
           </div>
           <h6>{selectedRange[0].startDate.toLocaleDateString('pt-br', { year: 'numeric', month: 'long', day: 'numeric'})} - {selectedRange[0].endDate.toLocaleDateString('pt-br', { year: 'numeric', month: 'long', day: 'numeric'})}</h6>
           </Row>
-          <div className="row">
-        <div className="col-lg-8">
-          <div className="row">
-            <div className="col-xl-6 mb-xl-0 mb-4">
+          
+          {isLoadingAll ? 
+          (
+            <div className='dashboard-loading-box'>
+                <div class="custom-loader"></div>
+            </div>
+          ):
+          (
+
+            <div className="row">
+              <div className="col-lg-8">
+            <div className="row">
+              <div className="col-xl-6 mb-xl-0 mb-4">
 
 
-              <div className="card bg-transparent shadow-xl">
-                <div className="overflow-hidden position-relative border-radius-xl">
-                  <img src={LogoPattern} className="position-absolute opacity-2 start-0 top-0 w-100 z-index-1 h-100" alt="pattern-tree" />
-                  <span className="mask bg-gradient-dark opacity-10"></span>
-                  <div className="card-body position-relative z-index-1 p-3">
-                    <i className="material-icons text-white p-2">Bem vindo, {localStorage.getItem('name')}</i>
-                    <h5 className="text-white mt-4 mb-5 pb-2">{localStorage.getItem('email')}</h5>
-                    <div className="d-flex">
+                <div className="card bg-transparent shadow-xl">
+                  <div className="overflow-hidden position-relative border-radius-xl">
+                    <img src={LogoPattern} className="position-absolute opacity-2 start-0 top-0 w-100 z-index-1 h-100" alt="pattern-tree" />
+                    <span className="mask bg-gradient-dark opacity-10"></span>
+                    <div className="card-body position-relative z-index-1 p-3">
+                      <i className="material-icons text-white p-2">Bem vindo, {localStorage.getItem('name')}</i>
+                      <h5 className="text-white mt-4 mb-5 pb-2">{localStorage.getItem('email')}</h5>
                       <div className="d-flex">
-                        <div className="me-4">
-                          <p className="text-white text-sm opacity-8 mb-0">Nome</p>
-                          <h6 className="text-white mb-0">{localStorage.getItem('name')}</h6>
+                        <div className="d-flex">
+                          <div className="me-4">
+                            <p className="text-white text-sm opacity-8 mb-0">Nome</p>
+                            <h6 className="text-white mb-0">{localStorage.getItem('name')}</h6>
+                          </div>
+                          <div>
+                            <p className="text-white text-sm opacity-8 mb-0">Expires</p>
+                            <h6 className="text-white mb-0">11/22</h6>
+                          </div>
                         </div>
-                        <div>
-                          <p className="text-white text-sm opacity-8 mb-0">Expires</p>
-                          <h6 className="text-white mb-0">11/22</h6>
+                        <div className="ms-auto w-20 d-flex align-items-end justify-content-end">
+                          <img className="w-60 mt-2" src={LogoMaster} alt="logo" />
                         </div>
                       </div>
-                      <div className="ms-auto w-20 d-flex align-items-end justify-content-end">
-                        <img className="w-60 mt-2" src={LogoMaster} alt="logo" />
-                      </div>
                     </div>
                   </div>
                 </div>
               </div>
-            </div>
-            <div className="col-xl-6">
-              <div className="row card-account-bank">
+              <div className="col-xl-6">
+                <div className="row card-account-bank">
 
 
-              {bankData?.search?.map((item) => {
-                return(
-                <div className="col-md-6 col-6">
-                  <div className="card">
-                    <div className="card-header mx-4 p-3 text-center">
-                    {/* <button onClick={() => handleDeleteConta(item.id)}><i class="material-icons opacity-10">delete</i></button> */}
-                    <button onClick={() => handleShowEntradaExtrato(item.id)}><PlusCircle size={28} color="#999" weight="light" /></button>
-                      <div className="icon icon-shape icon-lg bg-gradient-primary shadow text-center border-radius-lg card-bank-account ">
-                      <Bank size={28} color="#fff" weight="light" />
-                      </div>
-                    </div>
-                    <div className="card-body pt-0 p-3 text-center">
-                      <h6 className="text-center mb-0">{item.nome}</h6>
-                      <span className="text-xs">Belong Interactive</span>
-                      <hr className="horizontal dark my-3" />
-                      <h5 className="mb-0" style={{color: item.saldo >= 0 ? '#77c777' : '#f26969'}}>{item?.saldo?.toLocaleString('pt-BR', {style: 'currency',currency: 'BRL'})}</h5>
-                    </div>
-                  </div>
-                </div>
-                  )
-                })}
-              </div>
-            </div>
-
-
-
-            <div className="col-md-12 mb-lg-0 mb-4">
-              <div className="card mt-4">
-                <div className="card-header pb-0 p-3">
-                  <div className="row">
-                    <div className="col-12 d-flex align-items-center justify-content-between" onClick={openMenu} style={{cursor:'pointer'}}>
-                      <h6 className="mb-0"  style={{color: '#f26969'}}>Clique para adicionar quanto você planeja gastar em cada categoria.<br /></h6>
-                      <Gear size={30} color='#999' weight='light'   />
-                    </div>
-                    <div className="col-6 text-end">
-
-                    </div>
-                  </div>
-                </div>
-                <div className="card-body p-3">
-                  <div className="row">
-                        <ProgressBar data={category} />
-                  </div>
-                  <span style={{fontSize:"12px", color:"#999"}}>Isso ajudará a acompanhar seu progresso e comparar com seus gastos reais.</span>
-                </div>
-              </div>
-            </div>
-
-
-
-
-
-
-
-            <div className="col-md-12 mb-lg-0 mb-4">
-              <div className="card mt-4">
-                <div className="card-header pb-0 p-3">
-                  <div className="row">
-                    <div className="col-6 d-flex align-items-center">
-                      <h6 className="mb-0"  style={{color: '#f26969'}}>Despesas por Categorias</h6>
-                    </div>
-                    <div className="col-6 text-end">
-
-                    </div>
-                  </div>
-                </div>
-                <div className="card-body p-3">
-                  <div className="row">
-
-                    <Chart
-                      options={optionsCategoria}
-                      series={seriesCategoria}
-                      type="bar"
-                      height={350}
-                    />
-                  </div>
-                </div>
-              </div>
-            </div>
-
-
-          <div className='col-md-12 test mt-4'>
-            <div className='card'>
-                <div className='card-header pb-0 p-3'></div>
-                <div className='card-body'  style={{overflow:'auto'}}>
-                  <div className='row'>
-                    <div className='col-md-6'>
-                      <div className=''>
-                          <h6 class="mb-0" style={{color: '#f26969'}}>Saídas</h6>
-                      </div>
-                    <Chart options={options} series={series} type="bar" width={500} height={320} />
-                    </div>
-                    <div className='col-md-6'>
-                      <div className=''>
-                          <h6 class="mb-0" style={{color:'#77c777'}}>Entradas</h6>
-                      </div>
-                      <Chart options={optionsEntrada} series={seriesEntradas} type="bar" width={500} height={320} />
-                    </div>
-                  </div>
-                </div>
-            </div>
-        </div>
-
-          </div>
-
-
-        </div>
-        <div className="col-lg-4">
-          <div className="card h-100">
-            <div className="card-header pb-0 p-3">
-              <div className="row">
-                <div className="col-6 d-flex align-items-center">
-                  <h6 className="mb-0">Extrato</h6>
-                </div>
-                <div className="col-6 text-end">
-                  <button className="btn btn-outline-primary btn-sm mb-0">View All</button>
-                </div>
-              </div>
-            </div>
-            <div className="card-body p-3 pb-0">
-              <ul className="list-group">
-
-                {extrato.map((item) => {
+                {bankData?.search?.map((item) => {
                   return(
-                        <li className="list-group-item border-0 d-flex justify-content-between ps-0 mb-2 border-radius-lg">
-                          <div className='item-icon-date'>
-                          {item.tipo === 'entrada' ? 
-                            (<>
-                              <ArrowCircleUp size={22} color="#4caf50" />
-                            </>) :
-                            (<>
-                              <ArrowCircleDown size={22} color="#f44336" />
-                            </>)} 
-                            <div className="d-flex flex-column">
-                              <h6 className="mb-1 text-dark font-weight-bold text-sm"><span>{item.contaBancaria.nome}</span> - <span>{formatarData(item.data)}</span></h6>
-                              <span className="text-xs" style={{textTransform:'capitalize'}}>{item.categoria}</span>
-                            </div>
-                          </div>
-                          <div className="d-flex align-items-center text-sm text-bold" style={{color: item.tipo === 'entrada' ? '#77c777' : 'red'}}>
-                            {item?.valor?.toLocaleString('pt-BR', {style: 'currency',currency: 'BRL'})}
-                            <button className="btn btn-link text-dark text-sm mb-0 px-0 ms-4" onClick={() => openDetailsExtrato(item)}><Eye size={20} color="#999" weight="light" /></button>
-                          </div>
-                        </li>
-                  )
-                })}
+                  <div className="col-md-6 col-6">
+                    <div className="card">
+                      <div className="card-header mx-4 p-3 text-center">
+                      {/* <button onClick={() => handleDeleteConta(item.id)}><i class="material-icons opacity-10">delete</i></button> */}
+                      <button onClick={() => handleShowEntradaExtrato(item.id)}><PlusCircle size={28} color="#999" weight="light" /></button>
+                        <div className="icon icon-shape icon-lg bg-gradient-primary shadow text-center border-radius-lg card-bank-account ">
+                        <Bank size={28} color="#fff" weight="light" />
+                        </div>
+                      </div>
+                      <div className="card-body pt-0 p-3 text-center">
+                        <h6 className="text-center mb-0">{item.nome}</h6>
+                        <span className="text-xs">Belong Interactive</span>
+                        <hr className="horizontal dark my-3" />
+                        <h5 className="mb-0" style={{color: item.saldo >= 0 ? '#77c777' : '#f26969'}}>{item?.saldo?.toLocaleString('pt-BR', {style: 'currency',currency: 'BRL'})}</h5>
+                      </div>
+                    </div>
+                  </div>
+                    )
+                  })}
+                </div>
+              </div>
 
 
-              </ul>
-            </div>
+
+              <div className="col-md-12 mb-lg-0 mb-4">
+                <div className="card mt-4">
+                  <div className="card-header pb-0 p-3">
+                    <div className="row">
+                      <div className="col-12 d-flex align-items-center justify-content-between" onClick={openMenu} style={{cursor:'pointer'}}>
+                        <h6 className="mb-0"  style={{color: '#f26969'}}>Clique para adicionar quanto você planeja gastar em cada categoria.<br /></h6>
+                        <Gear size={30} color='#999' weight='light'   />
+                      </div>
+                      <div className="col-6 text-end">
+
+                      </div>
+                    </div>
+                  </div>
+                  <div className="card-body p-3">
+                    <div className="row">
+                          <ProgressBar data={category} />
+                    </div>
+                    <span style={{fontSize:"12px", color:"#999"}}>Isso ajudará a acompanhar seu progresso e comparar com seus gastos reais.</span>
+                  </div>
+                </div>
+              </div>
+
+
+
+
+
+
+
+              <div className="col-md-12 mb-lg-0 mb-4">
+                <div className="card mt-4">
+                  <div className="card-header pb-0 p-3">
+                    <div className="row">
+                      <div className="col-6 d-flex align-items-center">
+                        <h6 className="mb-0"  style={{color: '#f26969'}}>Despesas por Categorias</h6>
+                      </div>
+                      <div className="col-6 text-end">
+
+                      </div>
+                    </div>
+                  </div>
+                  <div className="card-body p-3">
+                    <div className="row">
+
+                      <Chart
+                        options={optionsCategoria}
+                        series={seriesCategoria}
+                        type="bar"
+                        height={350}
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+
+            <div className='col-md-12 test mt-4'>
+              <div className='card'>
+                  <div className='card-header pb-0 p-3'></div>
+                  <div className='card-body'  style={{overflow:'auto'}}>
+                    <div className='row'>
+                      <div className='col-md-6'>
+                        <div className=''>
+                            <h6 class="mb-0" style={{color: '#f26969'}}>Saídas</h6>
+                        </div>
+                      <Chart options={options} series={series} type="bar" width={500} height={320} />
+                      </div>
+                      <div className='col-md-6'>
+                        <div className=''>
+                            <h6 class="mb-0" style={{color:'#77c777'}}>Entradas</h6>
+                        </div>
+                        <Chart options={optionsEntrada} series={seriesEntradas} type="bar" width={500} height={320} />
+                      </div>
+                    </div>
+                  </div>
+              </div>
           </div>
-        </div>
-      </div>
+
+            </div>
+
+
+              </div>
+              <div className="col-lg-4">
+            <div className="card h-100">
+              <div className="card-header pb-0 p-3">
+                <div className="row">
+                  <div className="col-6 d-flex align-items-center">
+                    <h6 className="mb-0">Extrato</h6>
+                  </div>
+                  <div className="col-6 text-end">
+                    <button className="btn btn-outline-primary btn-sm mb-0">View All</button>
+                  </div>
+                </div>
+              </div>
+              <div className="card-body p-3 pb-0">
+                <ul className="list-group">
+
+                  {isLoadingExtrato ?
+                   (
+                    <div className='dashboard-loading-box'>
+                      <div class="custom-loader"></div>
+                  </div>
+                   ):
+                   (
+                  <>
+                    {extrato.map((item) => {
+                      return(
+                            
+                            <li className="list-group-item border-0 d-flex justify-content-between ps-0 mb-2 border-radius-lg">
+                              <div className='item-icon-date'>
+                              {item.tipo === 'entrada' ? 
+                                (<>
+                                  <ArrowCircleUp size={22} color="#4caf50" />
+                                </>) :
+                                (<>
+                                  <ArrowCircleDown size={22} color="#f44336" />
+                                </>)} 
+                                <div className="d-flex flex-column">
+                                  <h6 className="mb-1 text-dark font-weight-bold text-sm"><span>{item.contaBancaria.nome}</span> - <span>{formatarData(item.data)}</span></h6>
+                                  <span className="text-xs" style={{textTransform:'capitalize'}}>{item.categoria}</span>
+                                </div>
+                              </div>
+                              <div className="d-flex align-items-center text-sm text-bold" style={{color: item.tipo === 'entrada' ? '#77c777' : 'red'}}>
+                                {item?.valor?.toLocaleString('pt-BR', {style: 'currency',currency: 'BRL'})}
+                                <button className="btn btn-link text-dark text-sm mb-0 px-0 ms-4" onClick={() => openDetailsExtrato(item)}><Eye size={20} color="#999" weight="light" /></button>
+                              </div>
+                            </li>
+                      )
+                    })}
+                  </>
+                   )}
+
+
+                </ul>
+              </div>
+            </div>
+              </div>
+          </div>
+          )
+          }
 
           </Row>
 

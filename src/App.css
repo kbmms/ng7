@@ -27932,6 +27932,15 @@
   .btn-login {
     position: relative;
   }
+  .dashboard-loading-box {
+    display:flex;
+    align-items:center;
+    justify-content:center;
+  }
+  .dashboard-loading-box .custom-loader {
+    position:relative;
+    border-color: #000000 #0000;
+  }
   .custom-loader {
     width: 25px;
     height: 25px;
