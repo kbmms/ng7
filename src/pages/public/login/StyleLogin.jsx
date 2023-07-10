@@ -14,7 +14,7 @@ background-repeat:no-repeat;
 
 
 .card-login {
-    background:#ffffffbf;;
+    background:#ffffffbf;
     box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
     border-radius:6px;
     padding:20px 15px;
@@ -25,7 +25,7 @@ background-repeat:no-repeat;
 
     input {
         background: none;
-    border: 1px solid #d2d6da;
+    border: 3px solid #d2d6da;
     border-radius: 0.375rem;
     border-top-left-radius: 0.375rem !important;
     border-bottom-left-radius: 0.375rem !important;
@@ -39,12 +39,22 @@ form {
 
     gap:10px;
 }
-button {
+button.btn-login{
     background-image: linear-gradient(195deg, #EC407A 0%, #D81B60 100%);
     box-shadow: 0 3px 3px 0 rgba(233, 30, 99, 0.15), 0 3px 1px -2px rgba(233, 30, 99, 0.2), 0 1px 5px 0 rgba(233, 30, 99, 0.15);
     border:none;
     color:#fff;
     font-weight:bold;
+    border-radius:4px;
+    padding:10px;
+}
+button.btn-cadastro {
+    background:transparent;
+    border:none;
+    color:#000 !important;
+    border:none;
+    color:#fff;
+    font-weight:light;
     border-radius:4px;
     padding:10px;
 }

@@ -37,6 +37,10 @@ function Login() {
     setIsLoadingLogin(false)
   };
 
+  function signUp(){
+    navigate('/cadastro')
+  }
+
   
   return (
     <MainContainerLogin>
@@ -58,6 +62,9 @@ function Login() {
             />
             <button type="submit" className='btn-login'>Login {isLoadingLogin &&  <div class="custom-loader"></div>}</button>
           </form>
+          <div>
+            <button className='btn-cadastro' onClick={() => signUp()}>Ainda não tem cadastro? Cadastre-se Agora!</button>
+          </div>
         </div>
       </div>
     </MainContainerLogin>
