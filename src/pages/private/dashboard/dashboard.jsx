@@ -72,6 +72,7 @@ function Dashboard() {
   const [dadosGrafico, setDadosGrafico] = useState([]);
   
   const [descricaoDetails, setDescricaoDetails] = useState('')
+  const [categoriaExtrato, setCategoriaExtrato] = useState('')
 
   const [category, setCategory] = useState([])
 
@@ -574,6 +575,7 @@ function Dashboard() {
   function openDetailsExtrato (data){
     console.log(data)
     setDescricaoDetails(data.descricao)
+    setCategoriaExtrato(data.categoria)
     setShowDetailsExtrato(true)
   }
 
@@ -863,14 +865,15 @@ function Dashboard() {
                                   <ArrowCircleUp size={22} color="#4caf50" />
                                 </>) :
                                 (<>
-                                  <ArrowCircleDown size={22} color="#f44336" />
+                                  <ArrowCircleDown size={22} color="#EF5350" />
                                 </>)} 
                                 <div className="d-flex flex-column">
-                                  <h6 className="mb-1 text-dark font-weight-bold text-sm"><span>{item.contaBancaria.nome}</span> - <span>{formatarData(item.data)}</span></h6>
-                                  <span className="text-xs" style={{textTransform:'capitalize'}}>{item.categoria}</span>
+                                  <h6 className="mb-1 text-dark font-weight-bold text-sm"><span>{item.contaBancaria.nome}</span></h6>
+                                  <span className='extrato-data'>{formatarData(item.data)}</span>
+                                  {/* <span className="text-xs" style={{textTransform:'capitalize'}}>{item.categoria}</span> */}
                                 </div>
                               </div>
-                              <div className="d-flex align-items-center text-sm text-bold" style={{color: item.tipo === 'entrada' ? '#77c777' : 'red'}}>
+                              <div className="d-flex align-items-center text-sm text-bold" style={{color: item.tipo === 'entrada' ? '#77c777' : '#EF5350'}}>
                                 {item?.valor?.toLocaleString('pt-BR', {style: 'currency',currency: 'BRL'})}
                                 <button className="btn btn-link text-dark text-sm mb-0 px-0 ms-4" onClick={() => openDetailsExtrato(item)}><Eye size={20} color="#999" weight="light" /></button>
                               </div>
@@ -912,6 +915,7 @@ function Dashboard() {
         <Modal.Body>
               <Row>
                 <p>Descrição: {descricaoDetails}</p>
+                <p>Categoria: {categoriaExtrato}</p>
               </Row>
         </Modal.Body>
         <Modal.Footer>

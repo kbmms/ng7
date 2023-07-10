@@ -314,4 +314,10 @@ export const MainContainer = styled.div`
       justify-content: center;
       gap: 14px;
     }
+    span.extrato-data {
+      font-size: 0.75rem !important;
+    }
+    .text-dark {
+    color: #344767 !important;
+}
 `;
