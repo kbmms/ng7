@@ -21,6 +21,7 @@ import Neon from '../../../assets/img/neon.png'
 import Next from '../../../assets/img/next.png'
 import Caixa from '../../../assets/img/caixa.png'
 import Outro from '../../../assets/img/outro.png'
+import Santander from '../../../assets/img/santander.jpg'
 
 
 import Chart from "react-apexcharts";
@@ -184,7 +185,8 @@ function Dashboard() {
     Itau: Itau,
     Bradesco: Bradesco,
     Inter: Inter,
-    Outro: Outro
+    Outro: Outro,
+    Santander: Santander
   };
 
   
@@ -731,6 +733,7 @@ function Dashboard() {
                           {item.nome === "Next" && <img src={Next} alt="Next" />}
                           {item.nome === "Itau" && <img src={Itau} alt="Itau" />}
                           {item.nome === "Bradesco" && <img src={Bradesco} alt="Bradesco" />}
+                          {item.nome === "Santander" && <img src={Santander} alt="Santander" />}
                           {item.nome === "Inter" && <img src={Inter} alt="Inter" />}
                           {item.nome === "Outro" && <Bank size={28} color="#000" weight="light" />}
                         </div>
@@ -965,6 +968,7 @@ function Dashboard() {
                     <option value="Inter">Inter</option>
                     <option value="Next">Next</option>
                     <option value="Itau">Itau</option>
+                    <option value="Santander">Santander</option>
                     <option value="Outro">Outro</option>
                   </select>
                   {errorsForm2.nome && <span  className="msgs-error-validate">{errorsForm2.nome.message}</span> }
