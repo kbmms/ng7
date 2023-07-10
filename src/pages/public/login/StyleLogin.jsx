@@ -57,5 +57,6 @@ button.btn-cadastro {
     font-weight:light;
     border-radius:4px;
     padding:10px;
+    margin-top:40px;
 }
 `

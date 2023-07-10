@@ -60,7 +60,7 @@ const {
             {errors.name && <span  className="msgs-error-validate">{errors.name.message}</span> }
             <hr/>
             <input
-              type="text"
+              type="email"
               placeholder="Seu email"
               {...register("email", {
                 pattern: {
@@ -94,9 +94,9 @@ const {
             />
             {errors.repassword && <span  className="msgs-error-validate">{errors.repassword.message}</span> }
             <hr/>
-            <button type="submit" className='btn-cadastro'>Cadastrar {isLoadingLogin &&  <div class="custom-loader"></div>}</button>
+            <button style={{position:'relative'}} type="submit" className='btn-cadastro'>Cadastrar {!isLoadingLogin &&  <div class="custom-loader"></div>}</button>
           </form>
-          <div>
+          <div > 
             <button className='go-back' onClick={() => goBack()}>Voltar</button>
           </div>
         </div>
