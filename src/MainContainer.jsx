@@ -301,7 +301,6 @@ export const MainContainer = styled.div`
     }
     .cardlist {
       gap:5px;
-
     }
     .cardlist img {
       border-radius: 50%;
