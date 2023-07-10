@@ -1,20 +1,18 @@
 import styled from 'styled-components';
 import img1 from '../../../assets/img/bg-1.png'
-export const MainContainerLogin = styled.div`
-/* background:url('https://images.unsplash.com/photo-1497294815431-9365093b7331?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1950&q=80'); */
+export const MainContainerCadastro = styled.div`
+background:url(${img1});
 background-repeat:no-repeat;
 background-size:cover;
 height:100vh;
 display:flex;
 align-items:center;
 justify-content:center;
-background:url(${img1});
-background-size:cover;
-background-repeat:no-repeat;
+/* background:#e8e8e8; */
 
 
 .card-login {
-    background:#ffffffbf;;
+    background:#fff;
     box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
     border-radius:6px;
     padding:20px 15px;

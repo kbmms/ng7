@@ -1,5 +1,7 @@
 import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
 import Login from './pages/public/login/login';
+import Cadastro from './pages/public/cadastro/cadastro';
+
 import Dashboard from './pages/private/dashboard/dashboard';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -21,6 +23,7 @@ function App() {
     <Router>
       <Routes>
         <Route path="/" element={<PublicRoute><Login /></PublicRoute>} />
+        <Route path="/cadastro" element={<PublicRoute><Cadastro /></PublicRoute>} />
         <Route path="/dashboard/*" element={<PrivateRoute><Dashboard /></PrivateRoute>} />
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>

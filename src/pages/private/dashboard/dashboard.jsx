@@ -20,6 +20,7 @@ import Itau from '../../../assets/img/itau.png'
 import Neon from '../../../assets/img/neon.png'
 import Next from '../../../assets/img/next.png'
 import Caixa from '../../../assets/img/caixa.png'
+import Outro from '../../../assets/img/outro.png'
 
 
 import Chart from "react-apexcharts";
@@ -181,7 +182,8 @@ function Dashboard() {
     Next: Next,
     Itau: Itau,
     Bradesco: Bradesco,
-    Inter: Inter
+    Inter: Inter,
+    Outro: Outro
   };
 
   
