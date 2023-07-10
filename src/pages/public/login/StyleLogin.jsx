@@ -11,6 +11,15 @@ justify-content:center;
 background:url(${img1});
 background-size:cover;
 background-repeat:no-repeat;
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: space-evenly;
+
+h4 {
+    background:#fff;
+    padding:20px;
+}
 
 
 .card-login {

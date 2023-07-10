@@ -44,6 +44,7 @@ function Login() {
   
   return (
     <MainContainerLogin>
+      <h4>Transforme suas Finanças: Gerencie, Economize, Prospere!</h4>
       <div className='card-login col-10 col-md-4 col-lg-3'>
         <h1>Login</h1>
         <div className='form'>
@@ -63,7 +64,8 @@ function Login() {
             <button type="submit" className='btn-login'>Login {isLoadingLogin &&  <div class="custom-loader"></div>}</button>
           </form>
           <div>
-            <button className='btn-cadastro' onClick={() => signUp()}>Ainda não tem cadastro? Cadastre-se Agora!</button>
+            <button className='btn-cadastro' onClick={() => signUp()}>Ainda não tem cadastro? Cadastre-se Agora!</button> <br />
+            <span style={{padding:'10px', fontSize:'13px', color:'#999'}}>contato: contatosmarcelsantos@gmail.com</span>
           </div>
         </div>
       </div>

@@ -319,5 +319,8 @@ export const MainContainer = styled.div`
     }
     .text-dark {
     color: #344767 !important;
-}
+    }
+    h6.range-date-text {
+        margin-top: 10px;
+    }
 `;
