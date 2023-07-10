@@ -173,7 +173,16 @@ function Dashboard() {
     { value: 'outros', label: 'Outros' },
   ];
 
-
+  const bankImages = {
+    Nubank: Nubank,
+    BB: BB,
+    Caixa: Caixa,
+    Neon: Neon,
+    Next: Next,
+    Itau: Itau,
+    Bradesco: Bradesco,
+    Inter: Inter
+  };
 
   
   function formatarData(data) {
@@ -679,8 +688,11 @@ function Dashboard() {
                             <h6 className="text-white mb-0">11/22</h6> */}
                           </div>
                         </div>
-                        <div className="ms-auto w-20 d-flex align-items-end justify-content-end">
+                        <div className="ms-auto w-20 d-flex align-items-end justify-content-end cardlist">
                           {/* <img className="w-60 mt-2" src={LogoMaster} alt="logo" /> */}
+                          {bankData?.search?.map((bank) => (
+                            <img src={bankImages[bank.nome]} alt={bank.nome} key={bank.nome} />
+                          ))}
                         </div>
                       </div>
                     </div>

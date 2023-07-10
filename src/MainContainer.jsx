@@ -298,4 +298,12 @@ export const MainContainer = styled.div`
       height: 63px;
       border-radius: 50%;
     }
+    .cardlist {
+      gap:5px;
+
+    }
+    .cardlist img {
+      border-radius: 50%;
+      width:30px;
+    }
 `;
