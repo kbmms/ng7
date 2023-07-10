@@ -654,7 +654,7 @@ function Dashboard() {
               <button className='btn-logout' onClick={()=> handleLogout()}>Sair</button>
             </div>
           </div>
-          <h6>{selectedRange[0].startDate.toLocaleDateString('pt-br', { year: 'numeric', month: 'long', day: 'numeric'})} - {selectedRange[0].endDate.toLocaleDateString('pt-br', { year: 'numeric', month: 'long', day: 'numeric'})}</h6>
+          <h6 className='range-date-text'>{selectedRange[0].startDate.toLocaleDateString('pt-br', { year: 'numeric', month: 'long', day: 'numeric'})} - {selectedRange[0].endDate.toLocaleDateString('pt-br', { year: 'numeric', month: 'long', day: 'numeric'})}</h6>
           </Row>
           
 
@@ -704,7 +704,16 @@ function Dashboard() {
               <div className="col-xl-6">
                 <div className="row card-account-bank">
 
-
+                {bankData?.search?.length < 1 &&
+                 (
+                 <div className='empty-account'>
+                  <span>Crie sua primeira conta.</span>
+                    <Button variant="primary" className='btn bg-gradient-dark' onClick={handleShow}>
+                      <PlusCircle size={28} color="#999" weight="light" /> Criar Conta
+                  </Button>
+                 </div> 
+                 )
+                 }
                 {bankData?.search?.map((item) => {
                   return(
                   <div className="col-md-6 col-6">
@@ -820,7 +829,7 @@ function Dashboard() {
 
 
               </div>
-              <div className="col-lg-4">
+              <div className="col-lg-4 column-extrato">
             <div className="card h-100">
               <div className="card-header pb-0 p-3">
                 <div className="row">
@@ -843,6 +852,7 @@ function Dashboard() {
                    ):
                    (
                   <>
+                    {extrato.length < 1 && <span>Você ainda não cadastrou nenhum lançamento.</span>}
                     {extrato.map((item) => {
                       return(
                             

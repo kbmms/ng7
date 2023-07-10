@@ -209,6 +209,7 @@ export const MainContainer = styled.div`
     .card-account-bank {
       flex-wrap:nowrap;
       overflow:auto;
+      height:100%;
     }
     .card-bank-account {
       display:flex;
@@ -305,5 +306,12 @@ export const MainContainer = styled.div`
     .cardlist img {
       border-radius: 50%;
       width:30px;
+    }
+    .empty-account {
+      display:flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
     }
 `;
