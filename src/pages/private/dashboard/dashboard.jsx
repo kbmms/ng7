@@ -454,14 +454,14 @@ function Dashboard() {
             Authorization: `Bearer ${token}`, // Passar o token no cabeçalho da requisição
           },
         });
-        if (response.status === 401) {
+        const userData = response.data;
+        setBankData(userData);
+      } catch (error) {
+        if (error.response.status === 401) {
           // Token inválido, fazer logout
           localStorage.removeItem("token");
           navigate('/login');
         }
-        const userData = response.data;
-        setBankData(userData);
-      } catch (error) {
         console.log(error);
       }
   }
