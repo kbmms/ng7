@@ -94,7 +94,7 @@ const {
             />
             {errors.repassword && <span  className="msgs-error-validate">{errors.repassword.message}</span> }
             <hr/>
-            <button style={{position:'relative'}} type="submit" className='btn-cadastro'>Cadastrar {!isLoadingLogin &&  <div class="custom-loader"></div>}</button>
+            <button style={{position:'relative'}} type="submit" className='btn-cadastro'>Cadastrar {isLoadingLogin &&  <div class="custom-loader"></div>}</button>
           </form>
           <div > 
             <button className='go-back' onClick={() => goBack()}>Voltar</button>
