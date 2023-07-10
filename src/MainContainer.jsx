@@ -292,4 +292,10 @@ export const MainContainer = styled.div`
     .input-estimated-value::placeholder {
       color:#fff;
     }
+    .card-bank-account img {
+      display: block;
+      width: 63px;
+      height: 63px;
+      border-radius: 50%;
+    }
 `;

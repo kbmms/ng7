@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom';
 import {Container, Row, Col, Stack, Modal, Button} from 'react-bootstrap'
 import axios from 'axios';
 import '../../../App.css'
@@ -6,13 +7,19 @@ import '../../../App.css'
 import { MainContainer } from '../../../MainContainer';
 import { Calendar, PlusCircle, Eye, Bank, ArrowCircleUp, ArrowCircleDown, Gear} from "@phosphor-icons/react";
 
-import SpecificUser from '../../../Components/SpecificUsers';
 import ProgressBar from '../../../Components/Progress';
 import SlideProgressBar from '../../../Components/SlideProgress';
 
-import LogoMaster from '../../../assets/img/mastercard.png'
-import LogoVisa from '../../../assets/img/visa.png'
+
 import LogoPattern from '../../../assets/img/pattern-tree.svg'
+import Nubank from '../../../assets/img/nubank.png'
+import BB from '../../../assets/img/bb.png'
+import Bradesco from '../../../assets/img/bradesco.png'
+import Inter from '../../../assets/img/intermedium.png'
+import Itau from '../../../assets/img/itau.png'
+import Neon from '../../../assets/img/neon.png'
+import Next from '../../../assets/img/next.png'
+import Caixa from '../../../assets/img/caixa.png'
 
 
 import Chart from "react-apexcharts";
@@ -71,6 +78,8 @@ function Dashboard() {
   const dataAtual = new Date();
 
   const [isMenuOpen, setMenuOpen] = useState(false);
+  
+  const navigate = useNavigate();
 
   const openMenu = () => {
     setMenuOpen(true);
@@ -445,7 +454,11 @@ function Dashboard() {
             Authorization: `Bearer ${token}`, // Passar o token no cabeçalho da requisição
           },
         });
-    
+        if (response.status === 401) {
+          // Token inválido, fazer logout
+          localStorage.removeItem("token");
+          navigate('/login');
+        }
         const userData = response.data;
         setBankData(userData);
       } catch (error) {
@@ -607,10 +620,10 @@ function Dashboard() {
           <Row>
           <div className='header-main' style={{alignItems:'center'}}>
             <div>
-               <h2>Contas Bancárias</h2>
+               <h2>Controle Financeiro Pessoal</h2>
                
                <Button variant="primary" className='btn bg-gradient-dark' onClick={handleShow}>
-               <PlusCircle size={28} color="#999" weight="light" /> Conta Bancária
+               <PlusCircle size={28} color="#999" weight="light" /> Criar Conta
               </Button>
             </div>
 
@@ -662,12 +675,12 @@ function Dashboard() {
                             <h6 className="text-white mb-0">{localStorage.getItem('name')}</h6>
                           </div>
                           <div>
-                            <p className="text-white text-sm opacity-8 mb-0">Expires</p>
-                            <h6 className="text-white mb-0">11/22</h6>
+                            {/* <p className="text-white text-sm opacity-8 mb-0">Expires</p>
+                            <h6 className="text-white mb-0">11/22</h6> */}
                           </div>
                         </div>
                         <div className="ms-auto w-20 d-flex align-items-end justify-content-end">
-                          <img className="w-60 mt-2" src={LogoMaster} alt="logo" />
+                          {/* <img className="w-60 mt-2" src={LogoMaster} alt="logo" /> */}
                         </div>
                       </div>
                     </div>
@@ -685,8 +698,16 @@ function Dashboard() {
                       <div className="card-header mx-4 p-3 text-center">
                       {/* <button onClick={() => handleDeleteConta(item.id)}><i class="material-icons opacity-10">delete</i></button> */}
                       <button onClick={() => handleShowEntradaExtrato(item.id)}><PlusCircle size={28} color="#999" weight="light" /></button>
-                        <div className="icon icon-shape icon-lg bg-gradient-primary shadow text-center border-radius-lg card-bank-account ">
-                        <Bank size={28} color="#fff" weight="light" />
+                        <div className="icon icon-shape icon-lg shadow text-center border-radius-lg card-bank-account ">
+                          {item.nome === "Nubank" && <img src={Nubank} alt="Nubank" />}
+                          {item.nome === "BB" && <img src={BB} alt="BB" />}
+                          {item.nome === "Caixa" && <img src={Caixa} alt="Caixa" />}
+                          {item.nome === "Neon" && <img src={Neon} alt="Neon" />}
+                          {item.nome === "Next" && <img src={Next} alt="Next" />}
+                          {item.nome === "Itau" && <img src={Itau} alt="Itau" />}
+                          {item.nome === "Bradesco" && <img src={Bradesco} alt="Bradesco" />}
+                          {item.nome === "Inter" && <img src={Inter} alt="Inter" />}
+                          {item.nome === "Outro" && <Bank size={28} color="#000" weight="light" />}
                         </div>
                       </div>
                       <div className="card-body pt-0 p-3 text-center">
@@ -793,7 +814,7 @@ function Dashboard() {
                     <h6 className="mb-0">Extrato</h6>
                   </div>
                   <div className="col-6 text-end">
-                    <button className="btn btn-outline-primary btn-sm mb-0">View All</button>
+                    {/* <button className="btn btn-outline-primary btn-sm mb-0">View All</button> */}
                   </div>
                 </div>
               </div>
@@ -899,16 +920,26 @@ function Dashboard() {
         <Modal.Body>
               <Row>
                 <form onSubmit={handleSubmitForm2(handleSaldo)}>
-                  <label htmlFor='seu-banco'>Seu banco</label>
-                  <input type="text" 
-                  id="seu-banco" 
-                  className='form-control' 
-                  placeholder='Insira o nome do banco'
+                  <label htmlFor='seu-banco'>Contas</label>
+                  <select 
                   name="nome"
-                                    {...registerForm2("nome", {
-                                      required: "Conta Obrigatória",
-                                    })}/>
-                                    {errorsForm2.nome && <span  className="msgs-error-validate">{errorsForm2.nome.message}</span> }
+                  id="seu-banco"
+                  className='form-control'
+                  {...registerForm2("nome", {
+                    required: "Conta Obrigatória",
+                  })}>
+                    <option value="">Selecione</option>
+                    <option value="Nubank">Nubank</option>
+                    <option value="BB">BB</option>
+                    <option value="Bradesco">Bradesco</option>
+                    <option value="Caixa">Caixa</option>
+                    <option value="Neon">Neon</option>
+                    <option value="Inter">Inter</option>
+                    <option value="Next">Next</option>
+                    <option value="Itau">Itau</option>
+                    <option value="Outro">Outro</option>
+                  </select>
+                  {errorsForm2.nome && <span  className="msgs-error-validate">{errorsForm2.nome.message}</span> }
                   <br/>
                   <label htmlFor='seu-valor'>Valor incial (opcional)</label>
                   <input type="text" 
