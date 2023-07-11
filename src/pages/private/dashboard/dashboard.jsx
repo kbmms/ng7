@@ -5,7 +5,7 @@ import axios from 'axios';
 import '../../../App.css'
 
 import { MainContainer } from '../../../MainContainer';
-import { Calendar, PlusCircle, Eye, Bank, ArrowCircleUp, ArrowCircleDown, Gear} from "@phosphor-icons/react";
+import { Calendar, PlusCircle, Eye, Bank, ArrowCircleUp, ArrowCircleDown, Gear, ArrowsCounterClockwise} from "@phosphor-icons/react";
 
 import ProgressBar from '../../../Components/Progress';
 import SlideProgressBar from '../../../Components/SlideProgress';
@@ -47,6 +47,14 @@ function Dashboard() {
     setValue: setValueForm2,
   } = useForm();
 
+  const {
+    register,
+    watch,
+    handleSubmit,
+    setValue,
+    formState: { errors },
+    } = useForm();
+  
   const [userData, setUserData] = useState([]);
   const [extrato, setExtrato] = useState([]);
   const [show, setShow] = useState(false);
@@ -535,7 +543,8 @@ function Dashboard() {
   }
   
 
-  async function handleEntradaExtrato(){
+  async function handleEntradaExtrato(data){
+    const {valor, tipo, categoria, descricao} = data;
 
 
     const saldoLimpo = valor.replace(/\D/g, '');
@@ -555,11 +564,13 @@ function Dashboard() {
         tipo,
       
     })
+    setValue('valor', '')
+    setValue('tipo', '')
+    setValue('categoria', '')
+    setValue('descricao', '')
+
     setIsLoadingExtrato(false)
 
-    setDescricao('')
-    setValor('')
-    setTipo('')
     
     setShowEntradaExtrato(false)
     loadContaBancarias()
@@ -599,7 +610,7 @@ function Dashboard() {
       valorComPonto = valorFormatado;
     }
 
-    setValor(valorComPonto);
+    setValue(name, valorComPonto);
   }
 
 
@@ -728,7 +739,8 @@ function Dashboard() {
                       <div className="card-header mx-4 p-3 text-center">
                       {/* <button onClick={() => handleDeleteConta(item.id)}><i class="material-icons opacity-10">delete</i></button> */}
                       <button onClick={() => handleShowEntradaExtrato(item.id)}>
-                        <img className='mov-icon' src={movimentacao2} />
+                        {/* <img className='mov-icon' src={movimentacao2} /> */}
+                        <ArrowsCounterClockwise size={25} color="#999" weight="light" />
                       </button>
                         <div className="icon icon-shape icon-lg shadow text-center border-radius-lg card-bank-account ">
                           {item.nome === "Nubank" && <img src={Nubank} alt="Nubank" />}
@@ -1015,23 +1027,40 @@ function Dashboard() {
         </Modal.Header>
         <Modal.Body>
               <Row>
-                <form>
+                <form onSubmit={handleSubmit(handleEntradaExtrato)}>
                   <label htmlFor='seu-valor'>Valor</label>
-                  <input type="text" id="seu-banco" className='form-control' placeholder='Insira o valor' name="valor" value={valor} onChange={(e) => changeToCurrency(e)}/>
+                  <input type="text" 
+                  id="valor" 
+                  className='form-control' 
+                  placeholder='Insira o valor' 
+                  name="valor"              
+                  {...register("valor", {
+                    required: "Insira um valor",
+                    onChange: (e) => {changeToCurrency(e)}
+                  })}/>
+                  {errors.valor && <span  className="msgs-error-validate">{errors.valor.message}</span> }
                   <br/>
 
                   <label htmlFor='seu-tipo'>Tipo</label>
-                  <select  className='form-control'  value={tipo} onChange={(e) => setTipo(e.target.value)}>
+                  <select  className='form-control'
+                    {...register("tipo", {
+                      required: "Campo obrigatório",
+                    })}>
                     <option value="">Selecione</option>
                     <option value="entrada">Entrada</option>
                     <option value="saida">Saída</option>
                   </select>
+                  {errors.tipo && <span  className="msgs-error-validate">{errors.tipo.message}</span> }
                   <br/>
 
 
                   <div>
                   <label htmlFor="category-select">Selecione a categoria:</label>
-                  <select id="category-select" className='form-control' value={categoria} onChange={(e) => setCategoria(e.target.value)}>
+                  <select id="category-select" 
+                  className='form-control' 
+                  {...register("categoria", {
+                    required: "Campo Obrigatório",
+                  })}>
                     <option value="">Selecione uma categoria</option>
                     {categories.map((category) => (
                       <option key={category.value} value={category.value}>
@@ -1040,13 +1069,18 @@ function Dashboard() {
                     ))}
                   </select>
                 </div>
+                {errors.categoria && <span  className="msgs-error-validate">{errors.categoria.message}</span> }
                 <br/>
 
                   <label htmlFor='seu-descricao'>Descrição</label>
-                  <input type="text" id="seu-descricao" className='form-control' placeholder='Descrição'  value={descricao} onChange={(e) => setDescricao(e.target.value)}/>
+                  <input type="text" id="seu-descricao" className='form-control' placeholder='Descrição'
+                  {...register("descricao", {
+                  })}
+                  />
+                  {errors.descricao && <span  className="msgs-error-validate">{errors.descricao.message}</span> }
                   <br/>
 
-                  <Button onClick={handleEntradaExtrato}>Adicionar</Button>
+                  <Button type="submit">Adicionar</Button>
                 </form>
               </Row>
         </Modal.Body>

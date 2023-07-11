@@ -193,6 +193,8 @@ export const MainContainer = styled.div`
       left: 10px;
       background: #f2f2f2;
       padding: 4px;
+      border-radius:50%;
+      box-shadow: 0px 1px 2px #b3b2b2;
     }
     .rdrDefinedRangesWrapper, .rdrDateDisplayItem {
       display:none;
