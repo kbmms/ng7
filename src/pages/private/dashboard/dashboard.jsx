@@ -117,7 +117,7 @@ function Dashboard() {
     extrato?.forEach((objeto) => {
       const { categoria, valor, tipo } = objeto;
 
-      if(tipo !== 'saida'){
+      if(tipo !== 'despesa'){
         return;
       }
       if(categoria === 'investimentos'){
@@ -274,12 +274,12 @@ function Dashboard() {
   
 
   const [series, setSeries] = useState([{
-    name: 'Saídas',
+    name: 'Despesas',
     data: []
   }])
   const [seriesEntradas, setSeriesEntradas] = useState([
     {
-      name: 'Entradas',
+      name: 'Receitas',
       data: []
     }
   ]);
@@ -311,12 +311,12 @@ function Dashboard() {
           
           // Filtrar as chaves para incluir apenas os meses/anos que possuem extratos do tipo 'saida'
           const filteredChaves = chaves.filter(chave =>
-            extratosPorMes[chave].some(extrato => extrato.tipo === 'saida')
+            extratosPorMes[chave].some(extrato => extrato.tipo === 'despesa')
           );
   
             // Filtrar as chaves para incluir apenas os meses/anos que possuem extratos do tipo 'saida'
             const filteredChavesEntradas = chavesEntrada.filter(chave =>
-              extratosPorMes[chave].some(extrato => extrato.tipo === 'entrada')
+              extratosPorMes[chave].some(extrato => extrato.tipo === 'receita')
             );
   
           // Formatar as chaves filtradas como strings no formato "mês/ano"
@@ -335,14 +335,14 @@ function Dashboard() {
           // Obter a soma dos valores dos arrays de extratos do tipo 'saida' correspondentes a cada chave
           const data = filteredChaves.map(chave => {
             const soma = extratosPorMes[chave]
-              .filter(extrato => extrato.tipo === 'saida')
+              .filter(extrato => extrato.tipo === 'despesa')
               .reduce((acc, extrato) => acc + extrato.valor, 0);
             return soma;
           });
           
           const dataEntradas = filteredChavesEntradas.map(chave => {
             const soma = extratosPorMes[chave]
-              .filter(extrato => extrato.tipo === 'entrada')
+              .filter(extrato => extrato.tipo === 'receita')
               .reduce((acc, extrato) => acc + extrato.valor, 0);
             return soma;
           });
@@ -832,13 +832,13 @@ function Dashboard() {
                     <div className='row'>
                       <div className='col-md-6'>
                         <div className=''>
-                            <h6 class="mb-0" style={{color: '#f26969'}}>Saídas</h6>
+                            <h6 class="mb-0" style={{color: '#f26969'}}>Despesas</h6>
                         </div>
                       <Chart options={options} series={series} type="bar" width={500} height={320} />
                       </div>
                       <div className='col-md-6'>
                         <div className=''>
-                            <h6 class="mb-0" style={{color:'#77c777'}}>Entradas</h6>
+                            <h6 class="mb-0" style={{color:'#77c777'}}>Receitas</h6>
                         </div>
                         <Chart options={optionsEntrada} series={seriesEntradas} type="bar" width={500} height={320} />
                       </div>
@@ -880,7 +880,7 @@ function Dashboard() {
                             
                             <li className="list-group-item border-0 d-flex justify-content-between ps-0 mb-2 border-radius-lg">
                               <div className='item-icon-date'>
-                              {item.tipo === 'entrada' ? 
+                              {item.tipo === 'receita' ? 
                                 (<>
                                   <ArrowCircleUp size={35} color="#4caf50" weight='light' />
                                 </>) :
@@ -893,7 +893,7 @@ function Dashboard() {
                                   {/* <span className="text-xs" style={{textTransform:'capitalize'}}>{item.categoria}</span> */}
                                 </div>
                               </div>
-                              <div className="d-flex align-items-center text-sm text-bold" style={{color: item.tipo === 'entrada' ? '#77c777' : '#EF5350'}}>
+                              <div className="d-flex align-items-center text-sm text-bold" style={{color: item.tipo === 'receita' ? '#77c777' : '#EF5350'}}>
                                 {item?.valor?.toLocaleString('pt-BR', {style: 'currency',currency: 'BRL'})}
                                 <button className="btn btn-link text-dark text-sm mb-0 px-0 ms-4" onClick={() => openDetailsExtrato(item)}><Eye size={20} color="#999" weight="light" /></button>
                               </div>
@@ -1047,8 +1047,8 @@ function Dashboard() {
                       required: "Campo obrigatório",
                     })}>
                     <option value="">Selecione</option>
-                    <option value="entrada">Entrada</option>
-                    <option value="saida">Saída</option>
+                    <option value="receita">Receita</option>
+                    <option value="despesa">Despesa</option>
                   </select>
                   {errors.tipo && <span  className="msgs-error-validate">{errors.tipo.message}</span> }
                   <br/>
