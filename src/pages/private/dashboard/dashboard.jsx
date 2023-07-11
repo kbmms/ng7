@@ -882,10 +882,10 @@ function Dashboard() {
                               <div className='item-icon-date'>
                               {item.tipo === 'entrada' ? 
                                 (<>
-                                  <ArrowCircleUp size={22} color="#4caf50" />
+                                  <ArrowCircleUp size={35} color="#4caf50" weight='light' />
                                 </>) :
                                 (<>
-                                  <ArrowCircleDown size={22} color="#EF5350" />
+                                  <ArrowCircleDown size={35} color="#EF5350"  weight='light' />
                                 </>)} 
                                 <div className="d-flex flex-column">
                                   <h6 className="mb-1 text-dark font-weight-bold text-sm"><span>{item.contaBancaria.nome}</span></h6>
