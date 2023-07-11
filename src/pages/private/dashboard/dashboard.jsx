@@ -23,6 +23,9 @@ import Caixa from '../../../assets/img/caixa.png'
 import Outro from '../../../assets/img/outro.png'
 import Santander from '../../../assets/img/santander.jpg'
 
+import movimentacao1 from '../../../assets/img/mov-1.jpg'
+import movimentacao2 from '../../../assets/img/mov-11.jpg'
+
 
 import Chart from "react-apexcharts";
 import { DateRangePicker } from 'react-date-range';
@@ -724,7 +727,9 @@ function Dashboard() {
                     <div className="card">
                       <div className="card-header mx-4 p-3 text-center">
                       {/* <button onClick={() => handleDeleteConta(item.id)}><i class="material-icons opacity-10">delete</i></button> */}
-                      <button onClick={() => handleShowEntradaExtrato(item.id)}><PlusCircle size={28} color="#999" weight="light" /></button>
+                      <button onClick={() => handleShowEntradaExtrato(item.id)}>
+                        <img className='mov-icon' src={movimentacao2} />
+                      </button>
                         <div className="icon icon-shape icon-lg shadow text-center border-radius-lg card-bank-account ">
                           {item.nome === "Nubank" && <img src={Nubank} alt="Nubank" />}
                           {item.nome === "BB" && <img src={BB} alt="BB" />}

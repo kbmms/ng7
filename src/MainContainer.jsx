@@ -187,10 +187,12 @@ export const MainContainer = styled.div`
       border-radius:5px;
     }
     .card-header button {
-      background:transparent;
-      border:none;
-      outline:none;
-      box-shadows:none;
+      border: none;
+      outline: none;
+      position: absolute;
+      left: 10px;
+      background: #f2f2f2;
+      padding: 4px;
     }
     .rdrDefinedRangesWrapper, .rdrDateDisplayItem {
       display:none;
@@ -321,5 +323,9 @@ export const MainContainer = styled.div`
     }
     h6.range-date-text {
         margin-top: 10px;
+    }
+    .mov-icon {
+      width: 25px;
+      height: 26px;
     }
 `;
