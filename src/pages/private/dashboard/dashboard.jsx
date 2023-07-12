@@ -651,7 +651,7 @@ function Dashboard() {
             <div>
                <h2>Controle Financeiro Pessoal</h2>
                
-               <button variant="primary" className='btn-create-account' onClick={handleShow}>
+               <button variant="primary" className='btn-create-account' style={{marginBottom:'15px'}} onClick={handleShow}>
                <PlusCircle size={28} color="#fff" weight="light" /> Criar Conta
               </button>
             </div>
@@ -1068,7 +1068,7 @@ function Dashboard() {
                   {errors.descricao && <span  className="msgs-error-validate">{errors.descricao.message}</span> }
                   <br/>
 
-                  <Button type="submit">Adicionar</Button>
+                  <button type="submit" className='btn-create-account'>Salvar</button>
                 </form>
               </Row>
         </Modal.Body>
