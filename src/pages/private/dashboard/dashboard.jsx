@@ -652,7 +652,7 @@ function Dashboard() {
                <h2>Controle Financeiro Pessoal</h2>
                
                <Button variant="primary" className='btn bg-gradient-dark' onClick={handleShow}>
-               <PlusCircle size={28} color="#999" weight="light" /> Criar Conta
+               <PlusCircle size={28} color="#fff" weight="light" /> Criar Conta
               </Button>
             </div>
 
@@ -938,12 +938,6 @@ function Dashboard() {
                 <p>Categoria: {categoriaExtrato}</p>
               </Row>
         </Modal.Body>
-        <Modal.Footer>
-          {/* <Button variant="secondary" onClick={handleClose}>
-            Close
-          </Button> */}
-          
-        </Modal.Footer>
       </Modal>
 
 
