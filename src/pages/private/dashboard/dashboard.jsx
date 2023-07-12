@@ -891,7 +891,7 @@ function Dashboard() {
                                 <div className="d-flex flex-column">
                                   <div>
                                     
-                                    <span className='text-xs text-desc-cat'>{item?.descricao}</span> - <span className='text-xs text-desc-cat'>{item.categoria}</span>
+                                  <span className='text-xs text-desc-cat'>{item.categoria}</span> <span className='text-xs text-desc-cat'>{item?.descricao && ` - ${item.descricao}`}</span>
                                   </div>
                               
                                   {/* <h6 className="mb-1 text-dark font-weight-bold text-sm"><span>{item.contaBancaria.nome}</span></h6> */}
