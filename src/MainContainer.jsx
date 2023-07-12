@@ -253,7 +253,7 @@ export const MainContainer = styled.div`
     .slide-progress-box-main {
       position:fixed;
       z-index:9999;
-      background: #ffececba;
+      background: #9FA8DA;
     }
     .menu {
       transition: transform 0.3s ease;
@@ -329,6 +329,11 @@ export const MainContainer = styled.div`
     .mov-icon {
       width: 25px;
       height: 26px;
+    }
+
+    .item-icon-date img {
+      width:25px;
+      border-radius:50%;
     }
 
 `;

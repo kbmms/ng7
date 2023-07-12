@@ -880,15 +880,21 @@ function Dashboard() {
                             
                             <li className="list-group-item border-0 d-flex justify-content-between ps-0 mb-2 border-radius-lg">
                               <div className='item-icon-date'>
-                              {item.tipo === 'receita' ? 
+                              {/* {item.tipo === 'receita' ? 
                                 (<>
                                   <ArrowCircleUp size={35} color="#4caf50" weight='light' />
                                 </>) :
                                 (<>
                                   <ArrowCircleDown size={35} color="#EF5350"  weight='light' />
-                                </>)} 
+                                </>)}  */}
+                                <img src={bankImages[item.contaBancaria.nome]} alt={item.contaBancaria.nome} key={item.contaBancaria.nome} />
                                 <div className="d-flex flex-column">
-                                  <h6 className="mb-1 text-dark font-weight-bold text-sm"><span>{item.contaBancaria.nome}</span></h6>
+                                  <div>
+                                    
+                                    <span className='text-xs'>{item?.descricao}</span> - <span className='text-xs'>{item.categoria}</span>
+                                  </div>
+                              
+                                  {/* <h6 className="mb-1 text-dark font-weight-bold text-sm"><span>{item.contaBancaria.nome}</span></h6> */}
                                   <span className='extrato-data'>{formatarData(item.data)}</span>
                                   {/* <span className="text-xs" style={{textTransform:'capitalize'}}>{item.categoria}</span> */}
                                 </div>
