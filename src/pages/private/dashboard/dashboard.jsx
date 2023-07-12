@@ -669,7 +669,8 @@ function Dashboard() {
                <h2>Controle Financeiro Pessoal</h2>
                
                <button variant="primary" className='btn-create-account' style={{marginBottom:'15px'}} onClick={handleShow}>
-               <PlusCircle size={28} color="#fff" weight="light" /> Criar Conta
+               {/* <PlusCircle size={28} color="#fff" weight="light" />  */}
+               Criar Conta
               </button>
             </div>
 
