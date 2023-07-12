@@ -27911,9 +27911,10 @@
     width: 11px;
   }
   span.msgs-error-validate {
-    color:red;
-    font-size:10px;
-    text-transform:uppercase;
+    color: #ff7e7e;
+    font-size: 11px;
+    font-family: 'Roboto';
+    text-transform: inherit;
   }
   
   /* MS supports */
