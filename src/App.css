@@ -27973,10 +27973,15 @@
     }
   }
   .form-control {
-    background-color: #efefef !important;
     border:none !important;
     padding: 12px 5px !important;
+    border-bottom: 2px solid #f2f2f2 !important;
+    border-radius: 0 !important;
   }
+  .form-control:focus {
+    box-shadow: none !important;
+  }
+
 
   .btn-create-account {
     align-items: center;
