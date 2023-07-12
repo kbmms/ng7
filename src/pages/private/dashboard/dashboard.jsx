@@ -132,7 +132,8 @@ function Dashboard() {
     });
 
     const novoDadosGrafico = Object.entries(resumoCategory).map(([categoria, total]) => ({
-      categoria,
+      //nome das categorias despesas por categoria
+      categoria: categoriesNames[categoria],
       total,
     }));
 
@@ -187,6 +188,27 @@ function Dashboard() {
     { value: 'outros', label: 'Outros' },
   ];
 
+  const categoriesNames = {
+    'salario': 'Salário',
+    'renda_extra': 'Renda Extra',
+    'cartao': 'Cartão de Crédito',
+    'aluguel': 'Aluguel',
+    'vendas': 'Vendas',
+    'telefone_internet': 'Telefone e Internet',
+    'seguro':'Seguro',
+    'impostos': 'Impostos',
+    'alimentacao': 'Alimentação',
+    'transporte': 'Transporte',
+    'saude': 'Saúde',
+    'lazer': 'Lazer',
+    'vestuario_acessorios':'Vestuário e Acessórios',
+    'educacao':'Educação',
+    'cuidados_pessoais': 'Cuidados Pessoais',
+    'dividas_emprestimos': 'Dívidas e Empréstimos',
+    'investimentos':'Investimentos',
+    'outros':'Outros'
+  }
+
   const bankImages = {
     Nubank: Nubank,
     BB: BB,
@@ -199,6 +221,8 @@ function Dashboard() {
     Outro: Outro,
     Santander: Santander
   };
+
+
 
   
   function formatarData(data) {
@@ -368,12 +392,7 @@ function Dashboard() {
             }
           }));
         
-  
-  
-  
-  
-  
-  
+
           setSeries(prevSeries => [
             {
               ...prevSeries[0],
@@ -381,8 +400,6 @@ function Dashboard() {
             }
           ]);
   
-  
-                
           setSeriesEntradas(prevSeries => [
             {
               ...prevSeries[0],
@@ -891,7 +908,7 @@ function Dashboard() {
                                 <div className="d-flex flex-column">
                                   <div>
                                     
-                                  <span className='text-xs text-desc-cat'>{item.categoria}</span> <span className='text-xs text-desc-cat'>{item?.descricao && ` - ${item.descricao}`}</span>
+                                  <span className='text-xs text-desc-cat'>{categoriesNames[item.categoria]}</span> <span className='text-xs text-desc-cat'>{item?.descricao && ` - ${item.descricao}`}</span>
                                   </div>
                               
                                   {/* <h6 className="mb-1 text-dark font-weight-bold text-sm"><span>{item.contaBancaria.nome}</span></h6> */}
@@ -941,7 +958,7 @@ function Dashboard() {
         <Modal.Body>
               <Row>
                 <p>Descrição: {descricaoDetails}</p>
-                <p>Categoria: {categoriaExtrato}</p>
+                <p>Categoria: {categoriesNames[categoriaExtrato]}</p>
               </Row>
         </Modal.Body>
       </Modal>
