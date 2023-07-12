@@ -336,4 +336,9 @@ export const MainContainer = styled.div`
       border-radius:50%;
     }
 
+    .text-desc-cat {
+      font-weight: bold;
+      color: #487a91;
+    }
+
 `;
