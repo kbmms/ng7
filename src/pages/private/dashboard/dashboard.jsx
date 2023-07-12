@@ -1020,7 +1020,7 @@ function Dashboard() {
                                       })}/>
                                       {errorsForm2.saldo && <span  className="msgs-error-validate">{errorsForm2.saldo.message}</span> }
                   <br/>
-                  <Button className='custom-send-btn' type="submit">Cadastrar</Button>
+                  <button className='btn-create-account' type="submit" style={{marginTop:'15px'}}>Cadastrar</button>
                 </form>
               </Row>
         </Modal.Body>
