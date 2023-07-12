@@ -6612,8 +6612,20 @@
     border-bottom: var(--bs-modal-header-border-width) solid var(--bs-modal-header-border-color);
     border-top-left-radius: var(--bs-modal-inner-border-radius);
     border-top-right-radius: var(--bs-modal-inner-border-radius);
+    background: #FFC107;
+    border:none;
   }
-  
+  .modal-title.h4 {
+    color:#fff;
+  }
+  button.btn.btn-primary {
+    background: #673AB7;
+  }
+  .form-control {
+    background-color: #efefef;
+    border:none;
+    padding: 12px 5px;
+  }
   .modal-header .btn-close {
     padding: calc(var(--bs-modal-header-padding-y) * .5) calc(var(--bs-modal-header-padding-x) * .5);
     margin: calc(-.5 * var(--bs-modal-header-padding-y)) calc(-.5 * var(--bs-modal-header-padding-x)) calc(-.5 * var(--bs-modal-header-padding-y)) auto;

@@ -1006,12 +1006,6 @@ function Dashboard() {
                 </form>
               </Row>
         </Modal.Body>
-        <Modal.Footer>
-          {/* <Button variant="secondary" onClick={handleClose}>
-            Close
-          </Button> */}
-          
-        </Modal.Footer>
       </Modal>
 
 
@@ -1084,12 +1078,6 @@ function Dashboard() {
                 </form>
               </Row>
         </Modal.Body>
-        <Modal.Footer>
-          {/* <Button variant="secondary" onClick={handleClose}>
-            Close
-          </Button> */}
-          
-        </Modal.Footer>
       </Modal>
     </MainContainer>
   )
