@@ -651,9 +651,9 @@ function Dashboard() {
             <div>
                <h2>Controle Financeiro Pessoal</h2>
                
-               <Button variant="primary" className='btn bg-gradient-dark' onClick={handleShow}>
+               <button variant="primary" className='btn-create-account' onClick={handleShow}>
                <PlusCircle size={28} color="#fff" weight="light" /> Criar Conta
-              </Button>
+              </button>
             </div>
 
             <div class="btn-group">
@@ -725,10 +725,10 @@ function Dashboard() {
                 {bankData?.search?.length < 1 &&
                  (
                  <div className='empty-account'>
-                  <span>Crie sua primeira conta.</span>
-                    <Button variant="primary" className='btn bg-gradient-dark' onClick={handleShow}>
-                      <PlusCircle size={28} color="#999" weight="light" /> Criar Conta
-                  </Button>
+                  <span className='create-account-box-2'>Crie sua primeira conta.</span>
+                    <button variant="primary" className='btn-create-account' onClick={handleShow}>
+                      <PlusCircle size={28} color="#fff" weight="light" /> Criar Conta
+                  </button>
                  </div> 
                  )
                  }
