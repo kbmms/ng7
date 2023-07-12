@@ -94,7 +94,7 @@ export default function SlideProgressBar({ data, updateEndpoint, isMenuOpen, ope
     handleEstimatedValue(estimatedValue, categoryId, userId, index);
   };
 
-  const debouncedHandleBlur = debounce(handleBlur, 100);
+  const debouncedHandleBlur = debounce(handleBlur, 1);
 
   useEffect(() => {
     const initialValues = data?.map((item) => item?.estimatedValues[0]?.value || '');
