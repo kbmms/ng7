@@ -991,7 +991,7 @@ function Dashboard() {
                   id="seu-banco"
                   className='form-control'
                   {...registerForm2("nome", {
-                    required: "Conta Obrigatória",
+                    required: "Conta obrigatória",
                   })}>
                     <option value="">Selecione</option>
                     <option value="Nubank">Nubank</option>
@@ -1070,7 +1070,7 @@ function Dashboard() {
                   <select id="category-select" 
                   className='form-control' 
                   {...register("categoria", {
-                    required: "Campo Obrigatório",
+                    required: "Campo obrigatório",
                   })}>
                     <option value="">Selecione uma categoria</option>
                     {categories.map((category) => (
