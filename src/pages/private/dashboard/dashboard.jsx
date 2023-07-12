@@ -891,7 +891,7 @@ function Dashboard() {
                    ):
                    (
                   <>
-                    {extrato.length < 1 && <span>Você ainda não cadastrou nenhum lançamento.</span>}
+                    {extrato.length < 1 && <span style={{color:'#999', fontSize:'13px'}}>Sem dados no período selecionado ou sem registros até o momento.</span>}
                     {extrato.map((item) => {
                       return(
                             
