@@ -2,7 +2,10 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { MainContainerLogin } from './StyleLogin';
-import apiUrl from '../../../service/apiUrl'
+import apiUrl from '../../../service/apiUrl';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -30,9 +33,12 @@ function Login() {
       // Redirecionar para a página de dashboard após o login bem-sucedido
       navigate('/dashboard');
     } catch (error) {
-      console.error(error);
+      console.error('ops',error);
       setIsLoadingLogin(false)
       // Tratar erros de login
+      toast.error(error.response.data.error)
+      setTimeout(() => {
+      }, 5000);
     }
     setIsLoadingLogin(false)
   };
@@ -65,10 +71,11 @@ function Login() {
           </form>
           <div>
             <button className='btn-cadastro' onClick={() => signUp()}>Ainda não tem cadastro? Cadastre-se Agora!</button> <br />
-            <span style={{padding:'10px', fontSize:'13px', color:'#999'}}>contato: contatosmarcelsantos@gmail.com</span>
+            <span style={{padding:'10px', fontSize:'13px', color:'#000'}}>contato: contatosmarcelsantos@gmail.com</span>
           </div>
         </div>
       </div>
+      <ToastContainer />
     </MainContainerLogin>
   );
 }
