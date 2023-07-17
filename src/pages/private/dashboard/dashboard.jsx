@@ -35,10 +35,20 @@ import ptBR from "date-fns/locale/pt-BR"; // the locale you want
 
 import {useForm} from 'react-hook-form'
 import apiUrl from '../../../service/apiUrl'
+import ModalExtrato from '../../../Components/ModalExtrato';
 
 
 function Dashboard() {
-
+  const [showModal, setShowModal] = useState(false);
+  const [extratoData, setExtratoData] = useState();
+  const [extratoId, setExtratoId] = useState();
+  
+  const handleOpenModal = (data) => {
+    setExtratoData(data)
+    setDescricaoDetails(data.descricao)
+    setCategoriaExtrato(data.categoria)
+    setShowModal(true);
+  };
   const {
     register:registerForm2,
     setValue:setValue2,
@@ -421,9 +431,23 @@ function Dashboard() {
 
   const handleCloseExtrato = () => setShowEntradaExtrato(false);
   const handleShow = () => setShow(true);
-  const handleShowEntradaExtrato = (id) => {
+
+  const handleShowEntradaExtrato = (id, extratoId) => {
     setShowEntradaExtrato(true);
     setId(id)
+    setExtratoId(extratoId)
+    console.log("teste id extrato", extratoId)
+    if(extratoId){
+      setValue('valor', extratoData?.valor?.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'}));
+      setValue('tipo', extratoData?.tipo);
+      setValue('categoria', extratoData?.categoria);
+      setValue('descricao', extratoData?.descricao);
+    }else {
+      setValue('valor', '');
+      setValue('tipo', '');
+      setValue('categoria', '');
+      setValue('descricao', '');
+    }
   }
 
 
@@ -559,43 +583,49 @@ function Dashboard() {
     window.location.href = '/login'; 
   }
   
-
-  async function handleEntradaExtrato(data){
-    const {valor, tipo, categoria, descricao} = data;
-
-
+  async function handleEntradaExtrato(data) {
+    const { valor, tipo, categoria, descricao } = data;
+  
     const saldoLimpo = valor.replace(/\D/g, '');
-
-    const saldoFloat = parseFloat(saldoLimpo); // Converter o saldo para float
-    const saldoFormatted = (saldoFloat / 100).toFixed(2); // Formatar o saldo com duas casas decimais e converter para reais
-    const saldoNumber = Number(saldoFormatted); // Converter o saldo formatado para number
-
-    console.log(id)
-
-    setIsLoadingExtrato(true)
-    const response = await axios.post(`${apiUrl}/account/${id}/extrato`, {
-   
+    const saldoFloat = parseFloat(saldoLimpo);
+    const saldoFormatted = (saldoFloat / 100).toFixed(2);
+    const saldoNumber = Number(saldoFormatted);
+  
+    setIsLoadingExtrato(true);
+    
+    if (extratoId != undefined || extratoId != null) {
+      // Editar
+      const response = await axios.put(`${apiUrl}/account/${id}/extrato/${extratoId}`, {
         descricao,
         categoria,
         valor: saldoNumber,
         tipo,
-      
-    })
-    setValue('valor', '')
-    setValue('tipo', '')
-    setValue('categoria', '')
-    setValue('descricao', '')
-
-    setIsLoadingExtrato(false)
-
-    
-    setShowEntradaExtrato(false)
-    loadContaBancarias()
-    loadExtratos()
-    loadCategories()
-    loadGraphSaidaEntrada()
-    
+      });
+  
+      // Preencher os campos com os valores atualizados
+      setValue('valor', saldoNumber);
+      setValue('tipo', tipo);
+      setValue('categoria', categoria);
+      setValue('descricao', descricao);
+    } else {
+      // Criar
+      const response = await axios.post(`${apiUrl}/account/${id}/extrato`, {
+        descricao,
+        categoria,
+        valor: saldoNumber,
+        tipo,
+      });
+    }
+  
+    setIsLoadingExtrato(false);
+  
+    setShowEntradaExtrato(false);
+    loadContaBancarias();
+    loadExtratos();
+    loadCategories();
+    loadGraphSaidaEntrada();
   }
+  
 
     // Função de callback para atualizar o endpoint do componente pai
     const updateEndpoint = () => {
@@ -896,7 +926,7 @@ function Dashboard() {
                     {extrato.map((item) => {
                       return(
                             
-                            <li className="list-group-item border-0 d-flex justify-content-between ps-0 mb-2 border-radius-lg">
+                            <li className="list-group-item border-0 d-flex justify-content-between ps-0 mb-2 border-radius-lg" onClick={()=> handleOpenModal(item)}>
                               <div className='item-icon-date'>
                               {/* {item.tipo === 'receita' ? 
                                 (<>
@@ -919,7 +949,7 @@ function Dashboard() {
                               </div>
                               <div className="d-flex align-items-center text-sm text-bold" style={{color: item.tipo === 'receita' ? '#77c777' : '#EF5350'}}>
                                 {item?.valor?.toLocaleString('pt-BR', {style: 'currency',currency: 'BRL'})}
-                                <button className="btn btn-link text-dark text-sm mb-0 px-0 ms-4" onClick={() => openDetailsExtrato(item)}><Eye size={20} color="#999" weight="light" /></button>
+                                {/* <button className="btn btn-link text-dark text-sm mb-0 px-0 ms-4" onClick={() => openDetailsExtrato(item)}><Eye size={20} color="#999" weight="light" /></button> */}
                               </div>
                             </li>
                       )
@@ -1008,7 +1038,7 @@ function Dashboard() {
                   </select>
                   {errorsForm2.nome && <span  className="msgs-error-validate">{errorsForm2.nome.message}</span> }
                   <br/>
-                  <label htmlFor='seu-valor'>Valor incial (opcional)</label>
+                  <label htmlFor='seu-valor'>Valor incial</label>
                   <input type="text" 
                   id="seu-valor" 
                   className='form-control' 
@@ -1097,6 +1127,11 @@ function Dashboard() {
               </Row>
         </Modal.Body>
       </Modal>
+      <ModalExtrato showModal={showModal} setShowModal={setShowModal} imageBank={extratoData?.contaBancaria?.nome} titleExtrato={categoriesNames[extratoData?.categoria]}>
+        <span>Descrição: {extratoData?.descricao}</span>
+        <span>Categoria: {categoriesNames[categoriaExtrato]}</span>
+        <button onClick={() => handleShowEntradaExtrato(extratoData.contaBancariaId, extratoData?.id)}>Editar</button>
+      </ModalExtrato>
     </MainContainer>
   )
 }
