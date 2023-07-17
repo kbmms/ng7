@@ -45,6 +45,8 @@ function Dashboard() {
   const [extratoData, setExtratoData] = useState();
   const [extratoId, setExtratoId] = useState();
   const [isLoadingSubmitExtrato, setIsLoadingSubmitExtrato] = useState(false);
+
+  const [allExtrato, setAllExtrato] = useState();
   
   const handleOpenModal = (data) => {
     setExtratoData(data)
@@ -127,7 +129,7 @@ function Dashboard() {
   useEffect(() => {
     const resumoCategory = {};
 
-    extrato?.forEach((objeto) => {
+    allExtrato?.forEach((objeto) => {
       const { categoria, valor, tipo } = objeto;
 
       if(tipo !== 'despesa'){
@@ -151,7 +153,7 @@ function Dashboard() {
     }));
 
     setDadosGrafico(novoDadosGrafico);
-  }, [extrato]);
+  }, [allExtrato]);
  
 
   const optionsCategoria = {
@@ -460,6 +462,7 @@ function Dashboard() {
       setIsLoadingAll(true);
       await loadContaBancarias();
       await loadExtratos();
+      await loadAllExtratos();
       await loadCategories();
       await loadGraphSaidaEntrada();
       setIsLoadingAll(false);
@@ -485,6 +488,28 @@ function Dashboard() {
       .then(response => {
         const extratos = response.data.extratos;
         setExtrato(extratos);
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  }
+
+  async function loadAllExtratos(){
+    const token = localStorage.getItem('token'); // Obter o token do localStorage
+
+
+    axios.get(`${apiUrl}/extratos/all`, {
+      params:{
+        startDate: selectedRange[0].startDate?.toISOString().split('T')[0],
+        endDate: selectedRange[0].endDate?.toISOString().split('T')[0]
+      },
+      headers: {
+        Authorization: `Bearer ${token}`, // Passar o token no cabeçalho da requisição
+      },
+    })
+      .then(response => {
+        const allextratos = response.data.extratos;
+        setAllExtrato(allextratos);
       })
       .catch(error => {
         console.log(error);
@@ -625,6 +650,7 @@ function Dashboard() {
     setShowEntradaExtrato(false);
     loadContaBancarias();
     loadExtratos();
+    loadAllExtratos()
     loadCategories();
     loadGraphSaidaEntrada();
   }
@@ -698,6 +724,7 @@ function Dashboard() {
 
     loadContaBancarias();
     loadExtratos();
+    loadAllExtratos();
     loadCategories();
     loadGraphSaidaEntrada();
   }
