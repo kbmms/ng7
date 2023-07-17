@@ -28072,3 +28072,11 @@ li.list-group-item.border-0.d-flex.justify-content-between.ps-0.mb-2.border-radi
 .modalBodyExtrato span {
   display:block;
 }
+
+.btn-create-account.delete-account {
+  background-image: radial-gradient(100% 100% at 100% 0, #d73030 0, #d91616 100%) !important;
+}
+.btn-create-account.delete-account:hover {
+  background-image: radial-gradient(100% 100% at 100% 0, #d73030 0, #d91616 100%) !important;
+  transform: translateY(-2px);
+}

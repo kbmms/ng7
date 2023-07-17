@@ -37,11 +37,14 @@ import {useForm} from 'react-hook-form'
 import apiUrl from '../../../service/apiUrl'
 import ModalExtrato from '../../../Components/ModalExtrato';
 
+import Swal from 'sweetalert2'
+
 
 function Dashboard() {
   const [showModal, setShowModal] = useState(false);
   const [extratoData, setExtratoData] = useState();
   const [extratoId, setExtratoId] = useState();
+  const [isLoadingSubmitExtrato, setIsLoadingSubmitExtrato] = useState(false);
   
   const handleOpenModal = (data) => {
     setExtratoData(data)
@@ -680,6 +683,48 @@ function Dashboard() {
     setValueForm2(name, valorComPonto);
   };
 
+
+  async function deleteExtrato(id){
+    const token = localStorage.getItem('token');
+    try {
+      const response = await axios.delete(`${apiUrl}/api/extratos/${id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`, // Passar o token no cabeçalho da requisição
+        }
+      })
+    } catch(e) {
+      console.log(e)
+    }
+
+    loadContaBancarias();
+    loadExtratos();
+    loadCategories();
+    loadGraphSaidaEntrada();
+  }
+
+  function openMOdalDeleteExtrato(id){
+    Swal.fire({
+      title: 'Você tem certeza?',
+      text: "Você não será capaz de reverter isso!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      cancelButtonText: 'Cancelar!',
+      confirmButtonText: 'Sim, delete!'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire(
+          'Deletado!',
+          'Seu lançamento foi excluido.',
+          'success'
+        )
+        deleteExtrato(id)
+        setShowModal(false)
+      }
+    })
+  }
+
   return (
     <MainContainer>
     <Container fluid className=''>
@@ -1122,15 +1167,27 @@ function Dashboard() {
                   {errors.descricao && <span  className="msgs-error-validate">{errors.descricao.message}</span> }
                   <br/>
 
-                  <button type="submit" className='btn-create-account'>Salvar</button>
+                  <button 
+                  type="submit" 
+                  style={{width:'100%'}}
+                  className='btn-create-account'>{isLoadingExtrato ? <div><span>Salvar</span> <div class="custom-loader" style={{bottom:'10px'}}></div></div> : <span>Salvar</span> }</button>
                 </form>
               </Row>
         </Modal.Body>
       </Modal>
-      <ModalExtrato showModal={showModal} setShowModal={setShowModal} imageBank={extratoData?.contaBancaria?.nome} titleExtrato={categoriesNames[extratoData?.categoria]}>
+      <ModalExtrato 
+      showModal={showModal} 
+      setShowModal={setShowModal} 
+      imageBank={extratoData?.contaBancaria?.nome} 
+      titleExtrato={categoriesNames[extratoData?.categoria]}>
         <span>Descrição: {extratoData?.descricao}</span>
         <span>Categoria: {categoriesNames[categoriaExtrato]}</span>
-        <button onClick={() => handleShowEntradaExtrato(extratoData.contaBancariaId, extratoData?.id)}>Editar</button>
+        <span>Data/Hora: {formatarData(extratoData?.data)}</span>
+        <div className="d-flex align-items-center text-sm text-bold" style={{color: extratoData?.tipo === 'receita' ? '#77c777' : '#EF5350'}}>
+        {extratoData?.valor?.toLocaleString('pt-BR', {style: 'currency',currency: 'BRL'})}
+        </div>
+        <button  className='btn-create-account' style={{margin:'10px 10px 0px 0px'}} onClick={() => handleShowEntradaExtrato(extratoData.contaBancariaId, extratoData?.id)}>Editar</button>
+        <button  className='btn-create-account delete-account' style={{margin:'10px 0'}} onClick={() => openMOdalDeleteExtrato(extratoData?.id)}>Deletar</button>
       </ModalExtrato>
     </MainContainer>
   )
