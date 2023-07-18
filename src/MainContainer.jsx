@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const MainContainer = styled.div`
-  background-color: #999;
+  background-color: #f0f2f5;
 
 
   .aside {
@@ -34,7 +34,7 @@ export const MainContainer = styled.div`
   }
   .main-box {
     background: #f0f2f5;
-    padding:30px 30px;
+    padding:30px 10px;
   }
   .header-main {
     display: flex;
@@ -251,9 +251,11 @@ export const MainContainer = styled.div`
   
     }
     .slide-progress-box-main {
-      position:fixed;
-      z-index:9999;
+      position: fixed;
+      z-index: 9999;
       background: #9FA8DA;
+      top: 0;
+      width: 100%;
     }
     .menu {
       transition: transform 0.3s ease;

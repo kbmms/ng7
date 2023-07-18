@@ -1,6 +1,9 @@
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
-import {Container, Row, Col, Stack, Modal, Button} from 'react-bootstrap'
+
+import {Container, Row, Col, Stack, Modal, Button, Nav, Navbar, NavDropdown} from 'react-bootstrap'
+
+
 import axios from 'axios';
 import '../../../App.css'
 
@@ -40,6 +43,8 @@ import ModalExtrato from '../../../Components/ModalExtrato';
 
 import Swal from 'sweetalert2'
 
+
+import Menu from '../../../Components/Menu';
 
 function Dashboard() {
   const [showModal, setShowModal] = useState(false);
@@ -754,22 +759,18 @@ function Dashboard() {
   }
 
   return (
+
     <MainContainer>
-    <Container fluid className=''>
-      <Row>
- 
+          <Menu />
           <SlideProgressBar data={category} updateEndpoint={updateEndpoint} isMenuOpen={isMenuOpen} openMenu={openMenu} closeMenu={closeMenu}/>
-  
+    <Container>
+      <Row>
+
         <Col className='m-0 main-box'>
-
-
-
-
-
           <Row>
           <div className='header-main' style={{alignItems:'center'}}>
             <div>
-               <h2>Controle Financeiro Pessoal</h2>
+               
                
                <button variant="primary" className='btn-create-account' style={{marginBottom:'15px'}} onClick={handleShow}>
                {/* <PlusCircle size={28} color="#fff" weight="light" />  */}
@@ -949,15 +950,15 @@ function Dashboard() {
             <div className='col-md-12 test mt-4'>
               <div className='card'>
                   <div className='card-header pb-0 p-3'></div>
-                  <div className='card-body'  style={{overflow:'auto'}}>
+                  <div className='card-body'>
                     <div className='row'>
-                      <div className='col-md-6'>
+                      <div className='col-md-6' style={{overflow:'auto'}}>
                         <div className=''>
                             <h6 class="mb-0" style={{color: '#f26969'}}>Despesas</h6>
                         </div>
                       <Chart options={options} series={series} type="bar" width={500} height={320} />
                       </div>
-                      <div className='col-md-6'>
+                      <div className='col-md-6' style={{overflow:'auto'}}>
                         <div className=''>
                             <h6 class="mb-0" style={{color:'#77c777'}}>Receitas</h6>
                         </div>
