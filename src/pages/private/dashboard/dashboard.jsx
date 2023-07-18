@@ -22,6 +22,7 @@ import Next from '../../../assets/img/next.png'
 import Caixa from '../../../assets/img/caixa.png'
 import Outro from '../../../assets/img/outro.png'
 import Santander from '../../../assets/img/santander.jpg'
+import wireframe from '../../../assets/img/p2.png'
 
 import movimentacao1 from '../../../assets/img/mov-1.jpg'
 import movimentacao2 from '../../../assets/img/mov-11.jpg'
@@ -1037,6 +1038,7 @@ function Dashboard() {
               </>
           )
           }
+          <img src={wireframe} />
           </div>
 
         
