@@ -25496,3 +25496,6 @@ nav.bg-body-tertiary.navbar.navbar-expand-lg.navbar-light {
 
 
 
+.fade.modal.show {
+  padding-left:0 !important;
+}
