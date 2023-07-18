@@ -1038,7 +1038,7 @@ function Dashboard() {
               </>
           )
           }
-          <img src={wireframe} />
+    
           </div>
 
         
