@@ -25499,3 +25499,9 @@ nav.bg-body-tertiary.navbar.navbar-expand-lg.navbar-light {
 .fade.modal.show {
   padding-left:0 !important;
 }
+
+@media(max-width:991px){
+  .col-lg-12.pt-5.pb-5.column-extrato {
+    padding-top: 0 !important;
+  }
+}

@@ -238,7 +238,7 @@ export const MainContainer = styled.div`
     .progress-box-main {
       display:grid !important;
       grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr !important;
-      gap:30px;
+      gap:10px;
       overflow:auto;
     }
     .input-estimated-value {
@@ -343,4 +343,26 @@ export const MainContainer = styled.div`
       color: #487a91;
     }
 
+    .saldos-card-total span{
+      font-size:14px;
+      color:#fFf;
+      display:block;
+    }
+    .total-item {
+      display:flex;
+      gap:10px;
+    }
+    .text-green {
+      color: rgb(119, 199, 119) !important;
+      font-weight:bold !important;
+    }
+    span.text-red {
+      color: rgb(239, 83, 80); !important;
+      font-weight:bold !important;
+    }
+    .text-white {
+      color:#fff !important;
+      font-weight:bold !important;
+    }
+ 
 `;

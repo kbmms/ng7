@@ -52,6 +52,8 @@ function Dashboard() {
   const [extratoId, setExtratoId] = useState();
   const [isLoadingSubmitExtrato, setIsLoadingSubmitExtrato] = useState(false);
 
+
+
   const [allExtrato, setAllExtrato] = useState();
   
   const handleOpenModal = (data) => {
@@ -114,6 +116,11 @@ function Dashboard() {
 
   const [isMenuOpen, setMenuOpen] = useState(false);
   
+  const [saldoPositivo, setSaldoPositivo] = useState(0);
+  const [saldoNegativo, setSaldoNegativo] = useState(0);
+  const [saldoTotal, setSaldoTotal] = useState(0);
+
+
   const navigate = useNavigate();
 
   const openMenu = () => {
@@ -257,7 +264,8 @@ function Dashboard() {
     return `${dia}/${mes}/${ano} ${horas}:${minutos}`;
   }
   
- 
+
+  
 
   const [options, setOptions] = useState({
     chart: {
@@ -461,6 +469,37 @@ function Dashboard() {
     }
   }
 
+  useEffect(() => {
+    if (bankData) {
+      totalSaldos();
+    }
+  }, [bankData]);
+
+
+  async function totalSaldos() {
+    let saldoPositivoTotal = 0;
+    let saldoNegativoTotal = 0;
+
+    if (bankData && bankData?.search) {
+      bankData?.search?.forEach(item => {
+        const saldo = item.saldo;
+        if (saldo > 0) {
+          saldoPositivoTotal += saldo;
+        } else if (saldo < 0) {
+          saldoNegativoTotal += saldo;
+        }
+      });
+    }
+
+    const saldoTotal = saldoPositivoTotal + saldoNegativoTotal;
+
+    setSaldoPositivo(saldoPositivoTotal);
+    setSaldoNegativo(saldoNegativoTotal);
+    setSaldoTotal(saldoTotal);
+  }
+
+
+
 
   
   useEffect(() => {
@@ -556,6 +595,7 @@ function Dashboard() {
         });
         const userData = response.data;
         setBankData(userData);
+
       } catch (error) {
         if (error.response.status === 401) {
           // Token inválido, fazer logout
@@ -564,6 +604,8 @@ function Dashboard() {
         }
         console.log(error);
       }
+
+    
   }
   
 
@@ -758,6 +800,10 @@ function Dashboard() {
     })
   }
 
+
+
+
+
   return (
 
     <MainContainer>
@@ -817,13 +863,28 @@ function Dashboard() {
                     <img src={LogoPattern} className="position-absolute opacity-2 start-0 top-0 w-100 z-index-1 h-100" alt="pattern-tree" />
                     <span className="mask bg-gradient-dark opacity-10"></span>
                     <div className="card-body position-relative z-index-1 p-3">
-                      <i className="material-icons text-white p-2">Bem vindo, {localStorage.getItem('name')}</i>
-                      <h5 className="text-white mt-4 mb-5 pb-2">{localStorage.getItem('email')}</h5>
+                      <p className="text-white text-sm opacity-8 mb-0">Bem vindo,</p>
+                      <h6 className="text-white mb-0">{localStorage.getItem('name')}</h6>
+
+                      <h6 className="text-white mt-4 mb-5 pb-2">{localStorage.getItem('email')}</h6>
                       <div className="d-flex">
                         <div className="d-flex">
                           <div className="me-4">
-                            <p className="text-white text-sm opacity-8 mb-0">Nome</p>
-                            <h6 className="text-white mb-0">{localStorage.getItem('name')}</h6>
+                            <p className="text-white text-sm opacity-8 mb-0">Saldo em contas</p>
+                            <div className='saldos-card-total'>
+                              <div className='total-item'>
+                                <span>Positivas</span>
+                                <span className="mb-0 text-green">{saldoPositivo.toLocaleString('pt-BR', {style: 'currency',currency: 'BRL'})}</span>
+                              </div>
+                              <div className='total-item'>
+                                <span>Negativas</span>
+                                <span className="mb-0 text-red">{saldoNegativo.toLocaleString('pt-BR', {style: 'currency',currency: 'BRL'})}</span>
+                              </div>
+                              <div className='total-item'>
+                                <span>Positivas x Negativas</span>
+                                <span className="text-white mb-0 text-white">{saldoTotal.toLocaleString('pt-BR', {style: 'currency',currency: 'BRL'})}</span>
+                              </div>
+                            </div>
                           </div>
                           <div>
                             {/* <p className="text-white text-sm opacity-8 mb-0">Expires</p>
