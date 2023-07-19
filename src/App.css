@@ -25505,3 +25505,11 @@ nav.bg-body-tertiary.navbar.navbar-expand-lg.navbar-light {
     padding-top: 0 !important;
   }
 }
+.btn-sair-menu {
+  background:#efefee !important;
+  padding:7px 30px !important;
+}
+.btn-sair-menu:active {
+  background:#ccc !important;
+
+}

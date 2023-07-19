@@ -1,7 +1,11 @@
-import {Container, Row, Col, Stack, Modal, Button, Nav, Navbar, NavDropdown} from 'react-bootstrap'
+import {Container, Row, Col, Stack, Modal, Button, Nav, Navbar, NavDropdown, Form} from 'react-bootstrap'
 import Logo from '../../src/assets/img/logo.png'
 
 export default function Menu(){
+  function handleLogout (){
+    localStorage.removeItem('token');
+    window.location.href = '/login'; 
+  }
     return(
         <Navbar expand="lg" className="bg-body-tertiary">
         <Container>
@@ -25,6 +29,7 @@ export default function Menu(){
                 </NavDropdown.Item>
               </NavDropdown> */}
             </Nav>
+            <Button onClick={()=> handleLogout()} className='btn-sair-menu' style={{marginBottom:"0", border:"none", color:"#999", textTransform:'capitalize'}} variant="outline-success">Sair</Button>
           </Navbar.Collapse>
         </Container>
       </Navbar>

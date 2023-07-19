@@ -837,7 +837,7 @@ function Dashboard() {
                           onChange={item => setSelectedRange([item.selection])}/>
 
               </div>
-              <button className='btn-logout' onClick={()=> handleLogout()}>Sair</button>
+              {/* <button className='btn-logout' onClick={()=> handleLogout()}>Sair</button> */}
             </div>
           </div>
           <h6 className='range-date-text'>{selectedRange[0].startDate.toLocaleDateString('pt-br', { year: 'numeric', month: 'long', day: 'numeric'})} - {selectedRange[0].endDate.toLocaleDateString('pt-br', { year: 'numeric', month: 'long', day: 'numeric'})}</h6>
