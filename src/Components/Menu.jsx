@@ -1,10 +1,13 @@
 import {Container, Row, Col, Stack, Modal, Button, Nav, Navbar, NavDropdown} from 'react-bootstrap'
+import Logo from '../../src/assets/img/logo.png'
 
 export default function Menu(){
     return(
         <Navbar expand="lg" className="bg-body-tertiary">
         <Container>
-          <Navbar.Brand href="/dashboard">Controle Financeiro</Navbar.Brand>
+          <Navbar.Brand href="/dashboard">
+            <img src={Logo} width="100px" />
+          </Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto">

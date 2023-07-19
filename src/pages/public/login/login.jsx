@@ -5,6 +5,7 @@ import { MainContainerLogin } from './StyleLogin';
 import apiUrl from '../../../service/apiUrl';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Logo from '../../../assets/img/logo.png'
 
 function Login() {
   const [email, setEmail] = useState('');
@@ -52,8 +53,9 @@ function Login() {
     <MainContainerLogin>
       <h4>Transforme suas Finanças: Gerencie, Economize, Prospere!</h4>
       <div className='card-login col-10 col-md-4 col-lg-3'>
-        <h1>Login</h1>
+        <img style={{margin:'0 auto'}} src={Logo} width="100px" />
         <div className='form'>
+        <h6 style={{padding:'20px 0 0 0'}}>Acesse sua conta</h6>
           <form onSubmit={handleLogin}>
             <input
               type="email"
