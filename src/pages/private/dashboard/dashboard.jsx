@@ -866,7 +866,7 @@ function Dashboard() {
                       <p className="text-white text-sm opacity-8 mb-0">Bem vindo,</p>
                       <h6 className="text-white mb-0">{localStorage.getItem('name')}</h6>
 
-                      <h6 className="text-white mt-4 mb-5 pb-2">{localStorage.getItem('email')}</h6>
+                      <h6 className="text-white mt-1 mb-5 pb-2" style={{fontSize:'12px'}}>{localStorage.getItem('email')}</h6>
                       <div className="d-flex">
                         <div className="d-flex">
                           <div className="me-4">
