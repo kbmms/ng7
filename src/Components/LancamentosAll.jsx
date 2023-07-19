@@ -58,9 +58,9 @@ export default function LancamentosAll(){
 
     useEffect(() => {
       const fetchData = async () => {
-        setIsLoadingAll(true);
+
         await loadExtratos(page);
-        setIsLoadingAll(false);
+
       };
     
       fetchData();
@@ -69,8 +69,8 @@ export default function LancamentosAll(){
     async function loadExtratos(page){
         const token = localStorage.getItem('token'); // Obter o token do localStorage
     
-    
-        axios.get(`${apiUrl}/extratos`, {
+        setIsLoadingAll(true)
+       const response = await axios.get(`${apiUrl}/extratos`, {
           params:{
             startDate: selectedRange[0].startDate?.toISOString().split('T')[0],
             endDate: selectedRange[0].endDate?.toISOString().split('T')[0],
@@ -88,7 +88,9 @@ export default function LancamentosAll(){
           })
           .catch(error => {
             console.log(error);
+            setIsLoadingAll(false)
           });
+          setIsLoadingAll(false)
       }
 
 
@@ -284,73 +286,81 @@ export default function LancamentosAll(){
         Outro: Outro,
         Santander: Santander
       };
-
+      
 
     return(
           <>
-            <div className="col-lg-12 pt-5 pb-5 column-extrato">
-            <div className="card h-100">
-            <div className="card-header pb-0 p-3">
-                <div className="row">
-                <div className="col-6 d-flex align-items-center">
-                    <h6 className="mb-0">Extrato</h6>
-                </div>
-                <div className="col-6 text-end">
-                    {/* <button className="btn btn-outline-primary btn-sm mb-0">View All</button> */}
-                </div>
-                </div>
-            </div>
-            <div className="card-body p-3 pb-0">
-                <ul className="list-group">
+          {isLoadingAll ? 
+          (<>
+            <div className='dashboard-loading-box'>
+              <div class="custom-loader"></div>
+          </div>
+          </>) : 
+          (<>          
+              <div className="col-lg-12 pt-5 pb-5 column-extrato">
+              <div className="card h-100">
+              <div className="card-header pb-0 p-3">
+                  <div className="row">
+                  <div className="col-6 d-flex align-items-center">
+                      <h6 className="mb-0">Extrato</h6>
+                  </div>
+                  <div className="col-6 text-end">
+                      {/* <button className="btn btn-outline-primary btn-sm mb-0">View All</button> */}
+                  </div>
+                  </div>
+              </div>
+              <div className="card-body p-3 pb-0">
+                  <ul className="list-group">
 
-                {isLoadingExtrato ?
-                (
+                  {isLoadingExtrato ?
+                  (
                     <div className='dashboard-loading-box'>
-                    <div class="custom-loader"></div>
-                </div>
-                ):
-                (
-                <>
-                    {extrato?.length < 1 && <span style={{color:'#999', fontSize:'13px'}}>Sem dados no período selecionado ou sem registros até o momento.</span>}
-                    {extrato?.map((item) => {
-                    return(
-                            
-                            <li className="list-group-item border-0 d-flex justify-content-between ps-0 mb-2 border-radius-lg" onClick={()=> handleOpenModal(item)}>
-                            <div className='item-icon-date'>
-                            {/* {item.tipo === 'receita' ? 
-                                (<>
-                                <ArrowCircleUp size={35} color="#4caf50" weight='light' />
-                                </>) :
-                                (<>
-                                <ArrowCircleDown size={35} color="#EF5350"  weight='light' />
-                                </>)}  */}
-                                <img src={bankImages[item.contaBancaria.nome]} alt={item.contaBancaria.nome} key={item.contaBancaria.nome} />
-                                <div className="d-flex flex-column">
-                                <div>
-                                    
-                                <span className='text-xs text-desc-cat'>{categoriesNames[item.categoria]}</span> <span className='text-xs text-desc-cat'>{item?.descricao && ` - ${item.descricao}`}</span>
-                                </div>
-                            
-                                {/* <h6 className="mb-1 text-dark font-weight-bold text-sm"><span>{item.contaBancaria.nome}</span></h6> */}
-                                <span className='extrato-data'>{formatarData(item.data)}</span>
-                                {/* <span className="text-xs" style={{textTransform:'capitalize'}}>{item.categoria}</span> */}
-                                </div>
-                            </div>
-                            <div className="d-flex align-items-center text-sm text-bold" style={{color: item.tipo === 'receita' ? '#77c777' : '#EF5350'}}>
-                                {item?.valor?.toLocaleString('pt-BR', {style: 'currency',currency: 'BRL'})}
-                                {/* <button className="btn btn-link text-dark text-sm mb-0 px-0 ms-4" onClick={() => openDetailsExtrato(item)}><Eye size={20} color="#999" weight="light" /></button> */}
-                            </div>
-                            </li>
-                    )
-                    })}
-                </>
-                )}
+                      <div class="custom-loader"></div>
+                  </div>
+                  ):
+                  (
+                  <>
+                      {extrato?.length < 1 && <span style={{color:'#999', fontSize:'13px'}}>Sem dados no período selecionado ou sem registros até o momento.</span>}
+                      {extrato?.map((item) => {
+                      return(
+                              
+                              <li className="list-group-item border-0 d-flex justify-content-between ps-0 mb-2 border-radius-lg" onClick={()=> handleOpenModal(item)}>
+                              <div className='item-icon-date'>
+                              {/* {item.tipo === 'receita' ? 
+                                  (<>
+                                  <ArrowCircleUp size={35} color="#4caf50" weight='light' />
+                                  </>) :
+                                  (<>
+                                  <ArrowCircleDown size={35} color="#EF5350"  weight='light' />
+                                  </>)}  */}
+                                  <img src={bankImages[item.contaBancaria.nome]} alt={item.contaBancaria.nome} key={item.contaBancaria.nome} />
+                                  <div className="d-flex flex-column">
+                                  <div>
+                                      
+                                  <span className='text-xs text-desc-cat'>{categoriesNames[item.categoria]}</span> <span className='text-xs text-desc-cat'>{item?.descricao && ` - ${item.descricao}`}</span>
+                                  </div>
+                              
+                                  {/* <h6 className="mb-1 text-dark font-weight-bold text-sm"><span>{item.contaBancaria.nome}</span></h6> */}
+                                  <span className='extrato-data'>{formatarData(item.data)}</span>
+                                  {/* <span className="text-xs" style={{textTransform:'capitalize'}}>{item.categoria}</span> */}
+                                  </div>
+                              </div>
+                              <div className="d-flex align-items-center text-sm text-bold" style={{color: item.tipo === 'receita' ? '#77c777' : '#EF5350'}}>
+                                  {item?.valor?.toLocaleString('pt-BR', {style: 'currency',currency: 'BRL'})}
+                                  {/* <button className="btn btn-link text-dark text-sm mb-0 px-0 ms-4" onClick={() => openDetailsExtrato(item)}><Eye size={20} color="#999" weight="light" /></button> */}
+                              </div>
+                              </li>
+                      )
+                      })}
+                  </>
+                  )}
 
 
-                </ul>
-            </div>
-            </div>
-            </div>
+                  </ul>
+              </div>
+              </div>
+              </div>
+          </>)}
                 <Pagination
                 activePage={pageInfos?.page}
                 itemsCountPerPage={pageInfos?.limit}
