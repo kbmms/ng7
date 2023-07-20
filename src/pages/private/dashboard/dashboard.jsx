@@ -1039,10 +1039,10 @@ function Dashboard() {
               <div className="card-header pb-0 p-3">
                 <div className="row">
                   <div className="col-6 d-flex align-items-center">
-                    <h6 className="mb-0">Extrato</h6>
+                    <h6 className="mb-0">Últimos lançamentos</h6>
                   </div>
                   <div className="col-6 text-end">
-                    {/* <button className="btn btn-outline-primary btn-sm mb-0">View All</button> */}
+                    <a href="/lancamentos" className="link-see-all">Ver todos</a>
                   </div>
                 </div>
               </div>

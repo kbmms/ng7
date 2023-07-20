@@ -364,5 +364,9 @@ export const MainContainer = styled.div`
       color:#fff !important;
       font-weight:bold !important;
     }
+    a.link-see-all {
+      text-decoration:none;
+      color:#999;
+    }
  
 `;
