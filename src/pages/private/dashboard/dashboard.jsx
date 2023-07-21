@@ -47,6 +47,8 @@ import Swal from 'sweetalert2'
 import Menu from '../../../Components/Menu';
 
 function Dashboard() {
+ 
+
   const [showModal, setShowModal] = useState(false);
   const [extratoData, setExtratoData] = useState();
   const [extratoId, setExtratoId] = useState();
@@ -98,7 +100,7 @@ function Dashboard() {
   const [descricao, setDescricao] = useState('');
   const [categoria, setCategoria] = useState('');
   const [valor, setValor] = useState('');
-  const [tipo, setTipo] = useState('');
+  // const [tipo, setTipo] = useState('');
   const [id, setId] = useState('');
   const [contaBancaria, setContaBancaria] = useState('');
   const [extratoByMonth, setExtratoByMonth] = useState();
@@ -119,7 +121,7 @@ function Dashboard() {
   const [saldoPositivo, setSaldoPositivo] = useState(0);
   const [saldoNegativo, setSaldoNegativo] = useState(0);
   const [saldoTotal, setSaldoTotal] = useState(0);
-
+  const tipo = watch('tipo');
 
   const navigate = useNavigate();
 
@@ -234,7 +236,31 @@ function Dashboard() {
     'cuidados_pessoais': 'Cuidados Pessoais',
     'dividas_emprestimos': 'Dívidas e Empréstimos',
     'investimentos':'Investimentos',
+    'outros':'Outros',
+    'extra':'Extra'
+  }
+
+  const categoriesDespesasNames = {
+    'cartao': 'Cartão de Crédito',
+    'aluguel': 'Aluguel',
+    'telefone_internet': 'Telefone e Internet',
+    'seguro':'Seguro',
+    'impostos': 'Impostos',
+    'alimentacao': 'Alimentação',
+    'transporte': 'Transporte',
+    'saude': 'Saúde',
+    'lazer': 'Lazer',
+    'vestuario_acessorios':'Vestuário e Acessórios',
+    'educacao':'Educação',
+    'cuidados_pessoais': 'Cuidados Pessoais',
+    'dividas_emprestimos': 'Dívidas e Empréstimos',
+    'investimentos':'Investimentos',
     'outros':'Outros'
+  }
+  const categoriesReceitasNames = {
+    'salario': 'Salário',
+    'renda_extra': 'Renda Extra',
+    'extra':'Extra'
   }
 
   const bankImages = {
@@ -696,6 +722,7 @@ function Dashboard() {
     setIsLoadingExtrato(false);
   
     setShowEntradaExtrato(false);
+    setShowModal(false)
     loadContaBancarias();
     loadExtratos();
     loadAllExtratos()
@@ -1234,18 +1261,28 @@ function Dashboard() {
 
                   <div>
                   <label htmlFor="category-select">Selecione a categoria:</label>
-                  <select id="category-select" 
-                  className='form-control' 
-                  {...register("categoria", {
-                    required: "Campo obrigatório",
-                  })}>
-                    <option value="">Selecione uma categoria</option>
-                    {categories.map((category) => (
-                      <option key={category.value} value={category.value}>
-                        {category.label}
-                      </option>
-                    ))}
-                  </select>
+                  <select
+                  id='category-select'
+                  className='form-control'
+                  {...register('categoria', {
+                    required: 'Campo obrigatório',
+                  })}
+                >
+                  <option value=''>Selecione uma categoria</option>
+                  {tipo === 'receita'
+                    ? Object.keys(categoriesReceitasNames).map((category) => (
+                        <option key={category} value={category}>
+                          {categoriesReceitasNames[category]}
+                        </option>
+                      ))
+                    : tipo === 'despesa'
+                    ? Object.keys(categoriesDespesasNames).map((category) => (
+                        <option key={category} value={category}>
+                          {categoriesDespesasNames[category]}
+                        </option>
+                      ))
+                    : null}
+                </select>
                 </div>
                 {errors.categoria && <span  className="msgs-error-validate">{errors.categoria.message}</span> }
                 <br/>

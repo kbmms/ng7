@@ -29,7 +29,7 @@ export default function LancamentosAll(){
         setValue,
         formState: { errors },
         } = useForm();
-
+        const tipo = watch('tipo');
 
     const [showModal, setShowModal] = useState(false);
     const [extrato, setExtrato] = useState();
@@ -182,7 +182,7 @@ export default function LancamentosAll(){
         }
       
         setIsLoadingExtrato(false);
-      
+        setShowModal(false);
         setShowEntradaExtrato(false);
         loadExtratos(page);
       }
@@ -251,8 +251,35 @@ export default function LancamentosAll(){
         'cuidados_pessoais': 'Cuidados Pessoais',
         'dividas_emprestimos': 'Dívidas e Empréstimos',
         'investimentos':'Investimentos',
+        'outros':'Outros',
+        'extra':'Extra'
+      }
+
+      const categoriesDespesasNames = {
+        'cartao': 'Cartão de Crédito',
+        'aluguel': 'Aluguel',
+        'vendas': 'Vendas',
+        'telefone_internet': 'Telefone e Internet',
+        'seguro':'Seguro',
+        'impostos': 'Impostos',
+        'alimentacao': 'Alimentação',
+        'transporte': 'Transporte',
+        'saude': 'Saúde',
+        'lazer': 'Lazer',
+        'vestuario_acessorios':'Vestuário e Acessórios',
+        'educacao':'Educação',
+        'cuidados_pessoais': 'Cuidados Pessoais',
+        'dividas_emprestimos': 'Dívidas e Empréstimos',
+        'investimentos':'Investimentos',
         'outros':'Outros'
       }
+      const categoriesReceitasNames = {
+        'salario': 'Salário',
+        'renda_extra': 'Renda Extra',
+        'extra':'Extra'
+      }
+
+
       const categories = [
         { value: 'salario', label: 'Salário' },
         { value: 'renda_extra', label: 'Renda Extra' },
@@ -423,18 +450,28 @@ export default function LancamentosAll(){
 
                   <div>
                   <label htmlFor="category-select">Selecione a categoria:</label>
-                  <select id="category-select" 
-                  className='form-control' 
-                  {...register("categoria", {
-                    required: "Campo obrigatório",
-                  })}>
-                    <option value="">Selecione uma categoria</option>
-                    {categories.map((category) => (
-                      <option key={category.value} value={category.value}>
-                        {category.label}
-                      </option>
-                    ))}
-                  </select>
+                  <select
+                  id='category-select'
+                  className='form-control'
+                  {...register('categoria', {
+                    required: 'Campo obrigatório',
+                  })}
+                >
+                  <option value=''>Selecione uma categoria</option>
+                  {tipo === 'receita'
+                    ? Object.keys(categoriesReceitasNames).map((category) => (
+                        <option key={category} value={category}>
+                          {categoriesReceitasNames[category]}
+                        </option>
+                      ))
+                    : tipo === 'despesa'
+                    ? Object.keys(categoriesDespesasNames).map((category) => (
+                        <option key={category} value={category}>
+                          {categoriesDespesasNames[category]}
+                        </option>
+                      ))
+                    : null}
+                </select>
                 </div>
                 {errors.categoria && <span  className="msgs-error-validate">{errors.categoria.message}</span> }
                 <br/>
