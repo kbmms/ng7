@@ -336,6 +336,7 @@ export default function LancamentosAll(){
 
             </div>
         </div>
+                        <h6 className='range-date-text'>{selectedRange[0].startDate.toLocaleDateString('pt-br', { year: 'numeric', month: 'long', day: 'numeric'})} - {selectedRange[0].endDate.toLocaleDateString('pt-br', { year: 'numeric', month: 'long', day: 'numeric'})}</h6>
           {isLoadingAll ? 
           (<>
             <div className='dashboard-loading-box'>
