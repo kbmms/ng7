@@ -19,7 +19,12 @@ import Caixa from '../assets/img/caixa.png'
 import Outro from '../assets/img/outro.png'
 import Santander from '../assets/img/santander.jpg'
 
+import { DateRangePicker } from 'react-date-range';
+import 'react-date-range/dist/styles.css'; // Importe o arquivo de estilos
+import 'react-date-range/dist/theme/default.css'; // Importe o tema padrão
+import ptBR from "date-fns/locale/pt-BR"; // the locale you want
 
+import { Calendar } from "@phosphor-icons/react";
 
 export default function LancamentosAll(){
     const {
@@ -317,14 +322,29 @@ export default function LancamentosAll(){
 
     return(
           <>
+          <div class="btn-group pt-5">
+            <button class="btn-calendar dropdown-toggle" type="button" id="dropdownMenuClickableInside" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
+            <Calendar size={28} color="#999" weight="light" />
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuClickableInside">
+                      <DateRangePicker
+                        locale={ptBR}
+                        moveRangeOnFirstSelection={false}
+                        editableDateInputs={true}
+                        ranges={selectedRange}
+                        onChange={item => setSelectedRange([item.selection])}/>
+
+            </div>
+        </div>
           {isLoadingAll ? 
           (<>
             <div className='dashboard-loading-box'>
               <div class="custom-loader"></div>
           </div>
           </>) : 
-          (<>          
-              <div className="col-lg-12 pt-5 pb-5 column-extrato">
+          (<>        
+
+              <div className="col-lg-12 pt-3 pb-5 column-extrato">
               <div className="card h-100">
               <div className="card-header pb-0 p-3">
                   <div className="row">
@@ -347,7 +367,7 @@ export default function LancamentosAll(){
                   ):
                   (
                   <>
-                      {extrato?.length < 1 && <span style={{color:'#999', fontSize:'13px'}}>Sem dados no período selecionado ou sem registros até o momento.</span>}
+                      {extrato?.length < 1 && <span style={{color:'#999', fontSize:'13px', padding:'10px 0'}}>Sem dados no período selecionado ou sem registros até o momento.</span>}
                       {extrato?.map((item) => {
                       return(
                               
@@ -388,13 +408,17 @@ export default function LancamentosAll(){
               </div>
               </div>
           </>)}
-                <Pagination
-                activePage={pageInfos?.page}
-                itemsCountPerPage={pageInfos?.limit}
-                totalItemsCount={pageInfos?.totalCount}
-                itemClass="page-item"
-                linkClass="page-link"
-                onChange={pageNumber=>loadExtratos(pageNumber)}/>
+
+          {extrato?.length > 0 &&                     
+            <Pagination
+            activePage={pageInfos?.page}
+            itemsCountPerPage={pageInfos?.limit}
+            totalItemsCount={pageInfos?.totalCount}
+            itemClass="page-item"
+            linkClass="page-link"
+            onChange={pageNumber=>loadExtratos(pageNumber)}/>
+          }
+
             <ModalExtrato 
             showModal={showModal} 
             setShowModal={setShowModal} 
