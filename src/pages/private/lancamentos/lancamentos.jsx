@@ -9,7 +9,7 @@ export default function Lancamentos(){
     return(
         <MainContainer>
             <Menu />
-            <Container style={{height:'100vh'}}>
+            <Container>
                 <LancamentosAll />
             </Container>
         </MainContainer>

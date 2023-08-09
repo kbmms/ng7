@@ -1104,12 +1104,6 @@ function Dashboard() {
               </div>
             </div>
               </div>
-              </>
-          )
-          }
-    
-          </div>
-
           <div className='col-md-12 test mt-4'>
               <div className='card'>
                   <div className='card-header pb-0 p-3'></div>
@@ -1131,6 +1125,12 @@ function Dashboard() {
                   </div>
               </div>
           </div>
+              </>
+          )
+          }
+    
+          </div>
+
 
         </Col>
       </Row>

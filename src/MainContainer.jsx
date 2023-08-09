@@ -2,12 +2,12 @@ import styled from 'styled-components';
 
 export const MainContainer = styled.div`
   background-color: #f0f2f5;
-
+  min-height:100vh;
 
   .aside {
     background: #9094988a;
     width:237px;
-    height:100vh;
+    height:100%;
     margin:0;
     padding:0;
     

@@ -25513,3 +25513,12 @@ nav.bg-body-tertiary.navbar.navbar-expand-lg.navbar-light {
   background:#ccc !important;
 
 }
+
+.pagination {
+  margin-bottom: 0 !important;
+}
+
+.pagination {
+  padding-bottom: 30px;
+}
+
