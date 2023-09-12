@@ -82,7 +82,7 @@ function Login() {
               <button type="submit" className='btn-login'>Login {isLoadingLogin &&  <div class="custom-loader"></div>}</button>
             </form>
             <div>
-              <button className='btn-cadastro' onClick={() => signUp()}>Ainda não tem cadastro? <span>Cadastre-se Agora!</span></button> <br />
+              <button className='btn-cadastro' onClick={() => signUp()}>Ainda não tem cadastro? <span>Cadastre-se agora!</span></button> <br />
               <span style={{padding:'10px', fontSize:'13px', color:'#000'}}>contato: contatosmarcelsantos@gmail.com</span>
             </div>
           </div>
