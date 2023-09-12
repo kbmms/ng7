@@ -62,7 +62,7 @@ function Login() {
           <h6 style={{padding:'20px 0 0 0'}}>Acesse sua conta</h6>
             <form onSubmit={handleLogin}>
               <div className='box-inputs'>
-                <EnvelopeSimple size={32} color="#D81B60 "  weight="fill"/>
+                <EnvelopeSimple size={22} color="#D81B60 "  weight="fill"/>
                 <input
                   type="email"
                   placeholder="Email"
@@ -71,7 +71,7 @@ function Login() {
                 />
               </div>
               <div className='box-inputs'>
-              <Lock size={32} color="#D81B60 " weight="fill" />
+              <Lock size={22} color="#D81B60 " weight="fill" />
                 <input
                   type="password"
                   placeholder="Password"

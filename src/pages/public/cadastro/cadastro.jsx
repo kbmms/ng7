@@ -54,7 +54,7 @@ const {
         <div className='form'>
           <form  onSubmit={handleSubmit(handleCreateUser)}>
           <div className='box-inputs'>
-          <UserCircle size={32} color="#D81B60" weight="fill" />
+          <UserCircle size={22} color="#D81B60" weight="fill" />
             <input
               type="text"
               placeholder="Seu nome"
@@ -66,7 +66,7 @@ const {
             {errors.name && <span  className="msgs-error-validate">{errors.name.message}</span> }
 
             <div className='box-inputs'>
-            <EnvelopeSimple size={32} color="#D81B60 "  weight="fill"/>
+            <EnvelopeSimple size={22} color="#D81B60 "  weight="fill"/>
             <input
               type="email"
               placeholder="Seu email"
@@ -82,7 +82,7 @@ const {
             {errors.email && <span  className="msgs-error-validate">{errors.email.message}</span> }
 
             <div className='box-inputs'>
-            <Lock size={32} color="#D81B60 " weight="fill" />
+            <Lock size={22} color="#D81B60 " weight="fill" />
             <input
               type="password"
               placeholder="Senha"
@@ -96,7 +96,7 @@ const {
             {errors.password && <span  className="msgs-error-validate">{errors.password.message}</span> }
 
             <div className='box-inputs'>
-            <Lock size={32} color="#D81B60 " weight="fill" />
+            <Lock size={22} color="#D81B60 " weight="fill" />
             <input
               type="password"
               placeholder="Confirme sua senha"
