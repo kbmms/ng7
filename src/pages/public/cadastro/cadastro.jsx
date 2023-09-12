@@ -4,6 +4,7 @@ import axios from 'axios';
 import { MainContainerCadastro } from './StyleCadastro';
 import apiUrl from '../../../service/apiUrl'
 import {useForm} from 'react-hook-form'
+import Logo from '../../../assets/img/ng1.png'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import {EnvelopeSimple, Lock, UserCircle}  from "@phosphor-icons/react";
@@ -48,6 +49,7 @@ const {
     <MainContainerCadastro>
       <div className='sides'>
       <div className='card-login col-10 col-md-4 col-lg-3'>
+      <img style={{margin:'0 auto'}} src={Logo} width="120px" />
         <h1>Cadastre-se</h1>
         <div className='form'>
           <form  onSubmit={handleSubmit(handleCreateUser)}>
