@@ -5,7 +5,7 @@ import { MainContainerLogin } from './StyleLogin';
 import apiUrl from '../../../service/apiUrl';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import Logo from '../../../assets/img/logo.png'
+import Logo from '../../../assets/img/ng1.png'
 import {EnvelopeSimple, Lock, SignIn, PiggyBank}  from "@phosphor-icons/react";
 
 function Login() {
@@ -55,8 +55,8 @@ function Login() {
       <h4>Transforme suas Finanças: Gerencie, Economize, Prospere!</h4>
       <div className='sides'>
         <div className='card-login col-10 col-md-4 col-lg-3'>
-          {/* <img style={{margin:'0 auto'}} src={Logo} width="100px" /> */}
-          <SignIn size={42} color="#595959" weight="thin" />
+          <img style={{margin:'0 auto'}} src={Logo} width="120px" />
+          {/* <SignIn size={42} color="#595959" weight="thin" /> */}
           {/* <PiggyBank size={42}  style={{margin:'0 auto'}} color="#D81B60" weight="fill" /> */}
           <div className='form'>
           <h6 style={{padding:'20px 0 0 0'}}>Acesse sua conta</h6>

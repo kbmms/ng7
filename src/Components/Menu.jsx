@@ -1,5 +1,5 @@
 import {Container, Row, Col, Stack, Modal, Button, Nav, Navbar, NavDropdown, Form} from 'react-bootstrap'
-import Logo from '../../src/assets/img/logo.png'
+import Logo from '../../src/assets/img/ng2.png'
 
 export default function Menu(){
   function handleLogout (){
@@ -10,7 +10,7 @@ export default function Menu(){
         <Navbar expand="lg" className="bg-body-tertiary">
         <Container>
           <Navbar.Brand href="/dashboard">
-            <img src={Logo} width="100px" />
+            <img src={Logo} width="50px" />
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
