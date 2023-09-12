@@ -6,6 +6,7 @@ import apiUrl from '../../../service/apiUrl'
 import {useForm} from 'react-hook-form'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import {EnvelopeSimple, Lock, UserCircle}  from "@phosphor-icons/react";
 function Cadastro() {
 
 const {
@@ -45,10 +46,13 @@ const {
 
   return (
     <MainContainerCadastro>
+      <div className='sides'>
       <div className='card-login col-10 col-md-4 col-lg-3'>
         <h1>Cadastre-se</h1>
         <div className='form'>
           <form  onSubmit={handleSubmit(handleCreateUser)}>
+          <div className='box-inputs'>
+          <UserCircle size={32} color="#D81B60" weight="fill" />
             <input
               type="text"
               placeholder="Seu nome"
@@ -56,8 +60,11 @@ const {
                 required: "Campo obrigatório",
               })}
             />
+            </div>
             {errors.name && <span  className="msgs-error-validate">{errors.name.message}</span> }
-            <hr/>
+
+            <div className='box-inputs'>
+            <EnvelopeSimple size={32} color="#D81B60 "  weight="fill"/>
             <input
               type="email"
               placeholder="Seu email"
@@ -69,8 +76,11 @@ const {
                 required: "Campo obrigatório",
               })}
             />
+            </div>
             {errors.email && <span  className="msgs-error-validate">{errors.email.message}</span> }
-            <hr/>
+
+            <div className='box-inputs'>
+            <Lock size={32} color="#D81B60 " weight="fill" />
             <input
               type="password"
               placeholder="Senha"
@@ -80,9 +90,11 @@ const {
                 maxLength:{value:16, message:"Senha grande demais"}
               })}
             />
+            </div>
             {errors.password && <span  className="msgs-error-validate">{errors.password.message}</span> }
-            <hr/>
 
+            <div className='box-inputs'>
+            <Lock size={32} color="#D81B60 " weight="fill" />
             <input
               type="password"
               placeholder="Confirme sua senha"
@@ -91,14 +103,21 @@ const {
                 validate: (value) => value === watch('password') || "Ops! As senhas informadas estão diferentes." 
               })}
             />
+            </div>
             {errors.repassword && <span  className="msgs-error-validate">{errors.repassword.message}</span> }
-            <hr/>
+
+            
             <button style={{position:'relative'}} type="submit" className='btn-cadastro'>Cadastrar {isLoadingLogin &&  <div class="custom-loader"></div>}</button>
           </form>
           <div > 
-            <button className='go-back' onClick={() => goBack()}>Voltar</button>
+          <button className='btn-cadastro-back' onClick={() => goBack()}>Já tem uma conta? <span>Logue agora</span></button> 
           </div>
         </div>
+      </div>
+      <div className='side-public-b'>
+          <h1>Crie sua conta e faça seu controle financeiro!</h1>
+          <span>Falta pouco!</span>
+      </div>
       </div>
       <ToastContainer />
     </MainContainerCadastro>

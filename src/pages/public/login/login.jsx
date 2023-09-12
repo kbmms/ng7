@@ -6,6 +6,7 @@ import apiUrl from '../../../service/apiUrl';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Logo from '../../../assets/img/logo.png'
+import {EnvelopeSimple, Lock}  from "@phosphor-icons/react";
 
 function Login() {
   const [email, setEmail] = useState('');
@@ -52,29 +53,41 @@ function Login() {
   return (
     <MainContainerLogin>
       <h4>Transforme suas Finanças: Gerencie, Economize, Prospere!</h4>
-      <div className='card-login col-10 col-md-4 col-lg-3'>
-        <img style={{margin:'0 auto'}} src={Logo} width="100px" />
-        <div className='form'>
-        <h6 style={{padding:'20px 0 0 0'}}>Acesse sua conta</h6>
-          <form onSubmit={handleLogin}>
-            <input
-              type="email"
-              placeholder="Email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-            />
-            <input
-              type="password"
-              placeholder="Password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            />
-            <button type="submit" className='btn-login'>Login {isLoadingLogin &&  <div class="custom-loader"></div>}</button>
-          </form>
-          <div>
-            <button className='btn-cadastro' onClick={() => signUp()}>Ainda não tem cadastro? Cadastre-se Agora!</button> <br />
-            <span style={{padding:'10px', fontSize:'13px', color:'#000'}}>contato: contatosmarcelsantos@gmail.com</span>
+      <div className='sides'>
+        <div className='card-login col-10 col-md-4 col-lg-3'>
+          <img style={{margin:'0 auto'}} src={Logo} width="100px" />
+          <div className='form'>
+          <h6 style={{padding:'20px 0 0 0'}}>Acesse sua conta</h6>
+            <form onSubmit={handleLogin}>
+              <div className='box-inputs'>
+                <EnvelopeSimple size={32} color="#D81B60 "  weight="fill"/>
+                <input
+                  type="email"
+                  placeholder="Email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                />
+              </div>
+              <div className='box-inputs'>
+              <Lock size={32} color="#D81B60 " weight="fill" />
+                <input
+                  type="password"
+                  placeholder="Password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                />
+              </div>
+              <button type="submit" className='btn-login'>Login {isLoadingLogin &&  <div class="custom-loader"></div>}</button>
+            </form>
+            <div>
+              <button className='btn-cadastro' onClick={() => signUp()}>Ainda não tem cadastro? <span>Cadastre-se Agora!</span></button> <br />
+              <span style={{padding:'10px', fontSize:'13px', color:'#000'}}>contato: contatosmarcelsantos@gmail.com</span>
+            </div>
           </div>
+        </div>
+        <div className='side-public-b'>
+          <h1>Crie sua conta e faça seu controle financeiro!</h1>
+          <span style={{cursor:'pointer'}} onClick={() => signUp()}>Crie uma conta clicando aqui</span>
         </div>
       </div>
       <ToastContainer />

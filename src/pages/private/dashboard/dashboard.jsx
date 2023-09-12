@@ -851,11 +851,11 @@ function Dashboard() {
               </button>
             </div>
 
-            <div class="btn-group">
-              <button class="btn-calendar dropdown-toggle" type="button" id="dropdownMenuClickableInside" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
+            <div classname="btn-group">
+              <button classname="btn-calendar dropdown-toggle" type="button" id="dropdownMenuClickableInside" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
               <Calendar size={28} color="#999" weight="light" />
               </button>
-              <div class="dropdown-menu" aria-labelledby="dropdownMenuClickableInside">
+              <div classname="dropdown-menu" aria-labelledby="dropdownMenuClickableInside">
                         <DateRangePicker
                           locale={ptBR}
                           moveRangeOnFirstSelection={false}
@@ -875,7 +875,7 @@ function Dashboard() {
           {isLoadingAll ? 
           (
             <div className='dashboard-loading-box'>
-                <div class="custom-loader"></div>
+                <div classname="custom-loader"></div>
             </div>
           ):
           (
@@ -947,7 +947,7 @@ function Dashboard() {
                   <div className="col-md-6 col-6">
                     <div className="card">
                       <div className="card-header mx-4 p-3 text-center">
-                      {/* <button onClick={() => handleDeleteConta(item.id)}><i class="material-icons opacity-10">delete</i></button> */}
+                      {/* <button onClick={() => handleDeleteConta(item.id)}><i classname="material-icons opacity-10">delete</i></button> */}
                       <button onClick={() => handleShowEntradaExtrato(item.id)}>
                         {/* <img className='mov-icon' src={movimentacao2} /> */}
                         <ArrowsCounterClockwise size={25} color="#999" weight="light" />
@@ -1059,7 +1059,7 @@ function Dashboard() {
                   {isLoadingExtrato ?
                    (
                     <div className='dashboard-loading-box'>
-                      <div class="custom-loader"></div>
+                      <div classname="custom-loader"></div>
                   </div>
                    ):
                    (
@@ -1111,13 +1111,13 @@ function Dashboard() {
                     <div className='row'>
                       <div className='col-md-6' style={{overflow:'auto'}}>
                         <div className=''>
-                            <h6 class="mb-0" style={{color: '#f26969'}}>Despesas</h6>
+                            <h6 classname="mb-0" style={{color: '#f26969'}}>Despesas</h6>
                         </div>
                       <Chart options={options} series={series} type="bar" width={500} height={320} />
                       </div>
                       <div className='col-md-6' style={{overflow:'auto'}}>
                         <div className=''>
-                            <h6 class="mb-0" style={{color:'#77c777'}}>Receitas</h6>
+                            <h6 classname="mb-0" style={{color:'#77c777'}}>Receitas</h6>
                         </div>
                         <Chart options={optionsEntrada} series={seriesEntradas} type="bar" width={500} height={320} />
                       </div>
@@ -1298,7 +1298,7 @@ function Dashboard() {
                   <button 
                   type="submit" 
                   style={{width:'100%'}}
-                  className='btn-create-account'>{isLoadingExtrato ? <div><span>Salvar</span> <div class="custom-loader" style={{bottom:'10px'}}></div></div> : <span>Salvar</span> }</button>
+                  className='btn-create-account'>{isLoadingExtrato ? <div><span>Salvar</span> <div classname="custom-loader" style={{bottom:'10px'}}></div></div> : <span>Salvar</span> }</button>
                 </form>
               </Row>
         </Modal.Body>
