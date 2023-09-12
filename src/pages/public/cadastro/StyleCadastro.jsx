@@ -34,7 +34,8 @@ background-repeat:no-repeat;
     }
 
     h1 {
-        font-size:22px;
+        color: #b0b0b0;
+        font-size: 13px;
     }
 }
 form {

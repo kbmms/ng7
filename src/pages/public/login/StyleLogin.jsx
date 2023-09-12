@@ -42,6 +42,11 @@ h4 {
         padding: 0.625rem 0.75rem !important;
         line-height: 1.3 !important;
     }
+
+    h6 {
+        color: #b0b0b0;
+        font-size: 13px;
+    }
 }
 form {
     display:flex;
