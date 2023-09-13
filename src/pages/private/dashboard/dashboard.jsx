@@ -967,7 +967,7 @@ function Dashboard() {
                       </div>
                       <div className="card-body pt-0 p-3 text-center">
                         <h6 className="text-center mb-0">{item.nome}</h6>
-                        <span className="text-xs">Belong Interactive</span>
+                        <span className="text-xs">Conta Digital</span>
                         <hr className="horizontal dark my-3" />
                         <h5 className="mb-0" style={{color: item.saldo >= 0 ? '#77c777' : '#f26969'}}>{item?.saldo?.toLocaleString('pt-BR', {style: 'currency',currency: 'BRL'})}</h5>
                       </div>
